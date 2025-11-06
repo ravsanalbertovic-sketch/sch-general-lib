@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package task;
+
+option go_package = "github.com/ravsanalbertovic-sketch/scheduler-general-lib/tree/dev/api/pb/v1/task;taskv1";
+
+service TaskService {
+  rpc CreateTaskImage (CreateTaskImageRequest) returns (CreateTaskImageResponse);
+  rpc GetTaskImages (GetTaskImagesRequest) returns (GetTaskImagesResponse);
+  rpc UpdateTaskImages (UpdateTaskImageRequest) returns (UpdateTaskImagesResponse);
+  rpc DeleteTaskImages (DeleteTaskImageRequest) returns (DeleteTaskImagesResponse);
+}
+
+message CreateTaskImageRequest {
+  string name = 1;
+  string description = 2;
+  int32 important = 3;
+  int32 difficult = 4;
+}
+
+message CreateTaskImageResponse {
+    int64 id = 1;
+}
+
+message GetTaskImagesRequest {}
+
+message GetTaskImagesResponse{
+  repeated TaskImage tasks = 1;
+}
+
+message UpdateTaskImageRequest {
+  int64 id = 1;
+  string description = 2;
+  int32 important = 3;
+  int32 difficult = 4;
+}
+
+message UpdateTaskImagesResponse {
+  int64 id = 1;
+}
+
+message DeleteTaskImageRequest {
+  int64 id = 1;
+}
+
+message DeleteTaskImagesResponse{}
+
+message TaskImage {
+  int64 id = 1;
+  string name = 2;
+  string  user_id = 3;
+  string description = 4;
+  int32 important = 5;
+  int32 difficult = 6;
+  string created_at = 7;
+  string updated_at = 8;
+}
