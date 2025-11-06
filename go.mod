@@ -1,4 +1,4 @@
-module general-lib
+module github.com/ravsanalbertovic-sketch/sch-general-lib
 
 go 1.25.3
 
