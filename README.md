@@ -1,1 +1,1 @@
-go get github.com/ravsanalbertovic-sketch/scheduler-general-lib
+go get github.com/ravsanalbertovic-sketch/sch-general-lib
