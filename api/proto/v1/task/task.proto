@@ -2,27 +2,32 @@ syntax = "proto3";
 
 package task;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/ravsanalbertovic-sketch/scheduler-general-lib/tree/dev/api/pb/v1/task;taskv1";
 
 service TaskService {
   rpc CreateTaskImage (CreateTaskImageRequest) returns (CreateTaskImageResponse);
   rpc GetTaskImages (GetTaskImagesRequest) returns (GetTaskImagesResponse);
-  rpc UpdateTaskImages (UpdateTaskImageRequest) returns (UpdateTaskImagesResponse);
-  rpc DeleteTaskImages (DeleteTaskImageRequest) returns (DeleteTaskImagesResponse);
+  rpc UpdateTaskImage (UpdateTaskImageRequest) returns (UpdateTaskImageResponse);
+  rpc DeleteTaskImage (DeleteTaskImageRequest) returns (DeleteTaskImageResponse);
 }
 
 message CreateTaskImageRequest {
   string name = 1;
-  string description = 2;
-  int32 important = 3;
-  int32 difficult = 4;
+  string user_uuid = 2;
+  string description = 3;
+  int32 important = 4;
+  int32 difficult = 5;
 }
 
 message CreateTaskImageResponse {
     int64 id = 1;
 }
 
-message GetTaskImagesRequest {}
+message GetTaskImagesRequest {
+  string user_uuid = 1;
+}
 
 message GetTaskImagesResponse{
   repeated TaskImage tasks = 1;
@@ -30,12 +35,13 @@ message GetTaskImagesResponse{
 
 message UpdateTaskImageRequest {
   int64 id = 1;
-  string description = 2;
-  int32 important = 3;
-  int32 difficult = 4;
+  string name = 2;
+  string description = 3;
+  int32 important = 4;
+  int32 difficult = 5;
 }
 
-message UpdateTaskImagesResponse {
+message UpdateTaskImageResponse {
   int64 id = 1;
 }
 
@@ -43,7 +49,9 @@ message DeleteTaskImageRequest {
   int64 id = 1;
 }
 
-message DeleteTaskImagesResponse{}
+message DeleteTaskImageResponse{
+  bool success = 1;
+}
 
 message TaskImage {
   int64 id = 1;
@@ -52,6 +60,6 @@ message TaskImage {
   string description = 4;
   int32 important = 5;
   int32 difficult = 6;
-  string created_at = 7;
-  string updated_at = 8;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
 }

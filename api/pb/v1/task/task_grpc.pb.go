@@ -19,10 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	TaskService_CreateTaskImage_FullMethodName  = "/task.TaskService/CreateTaskImage"
-	TaskService_GetTaskImages_FullMethodName    = "/task.TaskService/GetTaskImages"
-	TaskService_UpdateTaskImages_FullMethodName = "/task.TaskService/UpdateTaskImages"
-	TaskService_DeleteTaskImages_FullMethodName = "/task.TaskService/DeleteTaskImages"
+	TaskService_CreateTaskImage_FullMethodName = "/task.TaskService/CreateTaskImage"
+	TaskService_GetTaskImages_FullMethodName   = "/task.TaskService/GetTaskImages"
+	TaskService_UpdateTaskImage_FullMethodName = "/task.TaskService/UpdateTaskImage"
+	TaskService_DeleteTaskImage_FullMethodName = "/task.TaskService/DeleteTaskImage"
 )
 
 // TaskServiceClient is the client API for TaskService service.
@@ -31,8 +31,8 @@ const (
 type TaskServiceClient interface {
 	CreateTaskImage(ctx context.Context, in *CreateTaskImageRequest, opts ...grpc.CallOption) (*CreateTaskImageResponse, error)
 	GetTaskImages(ctx context.Context, in *GetTaskImagesRequest, opts ...grpc.CallOption) (*GetTaskImagesResponse, error)
-	UpdateTaskImages(ctx context.Context, in *UpdateTaskImageRequest, opts ...grpc.CallOption) (*UpdateTaskImagesResponse, error)
-	DeleteTaskImages(ctx context.Context, in *DeleteTaskImageRequest, opts ...grpc.CallOption) (*DeleteTaskImagesResponse, error)
+	UpdateTaskImage(ctx context.Context, in *UpdateTaskImageRequest, opts ...grpc.CallOption) (*UpdateTaskImageResponse, error)
+	DeleteTaskImage(ctx context.Context, in *DeleteTaskImageRequest, opts ...grpc.CallOption) (*DeleteTaskImageResponse, error)
 }
 
 type taskServiceClient struct {
@@ -63,20 +63,20 @@ func (c *taskServiceClient) GetTaskImages(ctx context.Context, in *GetTaskImages
 	return out, nil
 }
 
-func (c *taskServiceClient) UpdateTaskImages(ctx context.Context, in *UpdateTaskImageRequest, opts ...grpc.CallOption) (*UpdateTaskImagesResponse, error) {
+func (c *taskServiceClient) UpdateTaskImage(ctx context.Context, in *UpdateTaskImageRequest, opts ...grpc.CallOption) (*UpdateTaskImageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateTaskImagesResponse)
-	err := c.cc.Invoke(ctx, TaskService_UpdateTaskImages_FullMethodName, in, out, cOpts...)
+	out := new(UpdateTaskImageResponse)
+	err := c.cc.Invoke(ctx, TaskService_UpdateTaskImage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskServiceClient) DeleteTaskImages(ctx context.Context, in *DeleteTaskImageRequest, opts ...grpc.CallOption) (*DeleteTaskImagesResponse, error) {
+func (c *taskServiceClient) DeleteTaskImage(ctx context.Context, in *DeleteTaskImageRequest, opts ...grpc.CallOption) (*DeleteTaskImageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteTaskImagesResponse)
-	err := c.cc.Invoke(ctx, TaskService_DeleteTaskImages_FullMethodName, in, out, cOpts...)
+	out := new(DeleteTaskImageResponse)
+	err := c.cc.Invoke(ctx, TaskService_DeleteTaskImage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -89,8 +89,8 @@ func (c *taskServiceClient) DeleteTaskImages(ctx context.Context, in *DeleteTask
 type TaskServiceServer interface {
 	CreateTaskImage(context.Context, *CreateTaskImageRequest) (*CreateTaskImageResponse, error)
 	GetTaskImages(context.Context, *GetTaskImagesRequest) (*GetTaskImagesResponse, error)
-	UpdateTaskImages(context.Context, *UpdateTaskImageRequest) (*UpdateTaskImagesResponse, error)
-	DeleteTaskImages(context.Context, *DeleteTaskImageRequest) (*DeleteTaskImagesResponse, error)
+	UpdateTaskImage(context.Context, *UpdateTaskImageRequest) (*UpdateTaskImageResponse, error)
+	DeleteTaskImage(context.Context, *DeleteTaskImageRequest) (*DeleteTaskImageResponse, error)
 	mustEmbedUnimplementedTaskServiceServer()
 }
 
@@ -104,11 +104,11 @@ func (UnimplementedTaskServiceServer) CreateTaskImage(context.Context, *CreateTa
 func (UnimplementedTaskServiceServer) GetTaskImages(context.Context, *GetTaskImagesRequest) (*GetTaskImagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTaskImages not implemented")
 }
-func (UnimplementedTaskServiceServer) UpdateTaskImages(context.Context, *UpdateTaskImageRequest) (*UpdateTaskImagesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaskImages not implemented")
+func (UnimplementedTaskServiceServer) UpdateTaskImage(context.Context, *UpdateTaskImageRequest) (*UpdateTaskImageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaskImage not implemented")
 }
-func (UnimplementedTaskServiceServer) DeleteTaskImages(context.Context, *DeleteTaskImageRequest) (*DeleteTaskImagesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteTaskImages not implemented")
+func (UnimplementedTaskServiceServer) DeleteTaskImage(context.Context, *DeleteTaskImageRequest) (*DeleteTaskImageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTaskImage not implemented")
 }
 func (UnimplementedTaskServiceServer) mustEmbedUnimplementedTaskServiceServer() {}
 
@@ -159,38 +159,38 @@ func _TaskService_GetTaskImages_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskService_UpdateTaskImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TaskService_UpdateTaskImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateTaskImageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskServiceServer).UpdateTaskImages(ctx, in)
+		return srv.(TaskServiceServer).UpdateTaskImage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskService_UpdateTaskImages_FullMethodName,
+		FullMethod: TaskService_UpdateTaskImage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServiceServer).UpdateTaskImages(ctx, req.(*UpdateTaskImageRequest))
+		return srv.(TaskServiceServer).UpdateTaskImage(ctx, req.(*UpdateTaskImageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskService_DeleteTaskImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TaskService_DeleteTaskImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteTaskImageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskServiceServer).DeleteTaskImages(ctx, in)
+		return srv.(TaskServiceServer).DeleteTaskImage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskService_DeleteTaskImages_FullMethodName,
+		FullMethod: TaskService_DeleteTaskImage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServiceServer).DeleteTaskImages(ctx, req.(*DeleteTaskImageRequest))
+		return srv.(TaskServiceServer).DeleteTaskImage(ctx, req.(*DeleteTaskImageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -211,12 +211,12 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TaskService_GetTaskImages_Handler,
 		},
 		{
-			MethodName: "UpdateTaskImages",
-			Handler:    _TaskService_UpdateTaskImages_Handler,
+			MethodName: "UpdateTaskImage",
+			Handler:    _TaskService_UpdateTaskImage_Handler,
 		},
 		{
-			MethodName: "DeleteTaskImages",
-			Handler:    _TaskService_DeleteTaskImages_Handler,
+			MethodName: "DeleteTaskImage",
+			Handler:    _TaskService_DeleteTaskImage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
