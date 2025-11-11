@@ -9,6 +9,7 @@ option go_package = "github.com/ravsanalbertovic-sketch/scheduler-general-lib/tr
 service TaskService {
   rpc CreateTaskImage (CreateTaskImageRequest) returns (CreateTaskImageResponse);
   rpc GetTaskImages (GetTaskImagesRequest) returns (GetTaskImagesResponse);
+  rpc GetTaskImage (GetTaskImageRequest) returns (GetTaskImageResponse);
   rpc UpdateTaskImage (UpdateTaskImageRequest) returns (UpdateTaskImageResponse);
   rpc DeleteTaskImage (DeleteTaskImageRequest) returns (DeleteTaskImageResponse);
 }
@@ -29,8 +30,16 @@ message GetTaskImagesRequest {
   string user_uuid = 1;
 }
 
-message GetTaskImagesResponse{
+message GetTaskImagesResponse {
   repeated TaskImage tasks = 1;
+}
+
+message GetTaskImageRequest {
+  int64 id = 1;
+}
+
+message GetTaskImageResponse {
+  TaskImage task_image = 1;
 }
 
 message UpdateTaskImageRequest {
