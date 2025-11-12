@@ -51,7 +51,7 @@ message UpdateTaskImageRequest {
 }
 
 message UpdateTaskImageResponse {
-  int64 id = 1;
+  bool success = 1;
 }
 
 message DeleteTaskImageRequest {
