@@ -12,6 +12,13 @@ service TaskService {
   rpc GetTaskImage (GetTaskImageRequest) returns (GetTaskImageResponse);
   rpc UpdateTaskImage (UpdateTaskImageRequest) returns (UpdateTaskImageResponse);
   rpc DeleteTaskImage (DeleteTaskImageRequest) returns (DeleteTaskImageResponse);
+
+  rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse);
+  rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskResponse);
+  rpc GetTasks (GetTasksRequest) returns (GetTasksResponse);
+  rpc RestTask ( RestTaskRequest) returns (RestTaskResponse);
+  rpc CompeteTask (CompeteTaskRequest) returns (CompleteTaskResponse);
+  rpc UnCompeteTask (UnCompeteTaskRequest) returns (UnCompleteTaskResponse);
 }
 
 message CreateTaskImageRequest {
@@ -77,10 +84,64 @@ message Task {
   string id = 1;
   string name = 2;
   string relation = 3;
-  int32 important = 4;
-  int32 difficulty = 5;
-  int64 deadline = 6;
-  int64 work_time = 7;
-  google.protobuf.Timestamp started_at = 8;
-  google.protobuf.Timestamp finished_at = 9;
+  bool completed = 4;
+  bool rest = 5;
+  int32 important = 6;
+  int32 difficulty = 7;
+  int64 deadline = 8;
+  int64 work_time = 9;
+  google.protobuf.Timestamp started_at = 10;
+  google.protobuf.Timestamp finished_at = 11;
+}
+
+message CreateTaskRequest {
+  int64 id = 1; // taskImageID
+  string relation = 2;
+  int32 important = 3; // если null то брать из taskImage
+  int32 difficulty = 4; // если null то брать из taskImage
+  int64 deadline = 5;
+}
+
+message CreateTaskResponse {
+  bool success = 1;
+}
+
+message DeleteTaskRequest {
+  string id = 1;
+}
+
+message DeleteTaskResponse {
+  bool success = 1;
+}
+
+message GetTasksRequest {
+  string user_uuid = 1;
+}
+
+message GetTasksResponse {
+  repeated Task tasks = 1;
+}
+
+message RestTaskRequest {
+  string id = 1;
+}
+
+message RestTaskResponse {
+  bool success = 1;
+}
+
+message CompeteTaskRequest {
+  string id = 1;
+}
+
+message CompleteTaskResponse {
+  bool success = 1;
+}
+
+message UnCompeteTaskRequest {
+  string id = 1;
+}
+
+message UnCompleteTaskResponse {
+  bool success = 1;
 }
