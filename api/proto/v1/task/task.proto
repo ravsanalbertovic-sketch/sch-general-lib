@@ -17,8 +17,8 @@ service TaskService {
   rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskResponse);
   rpc GetTasks (GetTasksRequest) returns (GetTasksResponse);
   rpc RestTask ( RestTaskRequest) returns (RestTaskResponse);
-  rpc CompeteTask (CompleteTaskRequest) returns (CompleteTaskResponse);
-  rpc UnCompeteTask (UnCompleteTaskRequest) returns (UnCompleteTaskResponse);
+  rpc CompleteTask (CompleteTaskRequest) returns (CompleteTaskResponse);
+  rpc UnCompleteTask (UnCompleteTaskRequest) returns (UnCompleteTaskResponse);
 }
 
 message CreateTaskImageRequest {

@@ -28,8 +28,8 @@ const (
 	TaskService_DeleteTask_FullMethodName      = "/task.TaskService/DeleteTask"
 	TaskService_GetTasks_FullMethodName        = "/task.TaskService/GetTasks"
 	TaskService_RestTask_FullMethodName        = "/task.TaskService/RestTask"
-	TaskService_CompeteTask_FullMethodName     = "/task.TaskService/CompeteTask"
-	TaskService_UnCompeteTask_FullMethodName   = "/task.TaskService/UnCompeteTask"
+	TaskService_CompleteTask_FullMethodName    = "/task.TaskService/CompleteTask"
+	TaskService_UnCompleteTask_FullMethodName  = "/task.TaskService/UnCompleteTask"
 )
 
 // TaskServiceClient is the client API for TaskService service.
@@ -45,8 +45,8 @@ type TaskServiceClient interface {
 	DeleteTask(ctx context.Context, in *DeleteTaskRequest, opts ...grpc.CallOption) (*DeleteTaskResponse, error)
 	GetTasks(ctx context.Context, in *GetTasksRequest, opts ...grpc.CallOption) (*GetTasksResponse, error)
 	RestTask(ctx context.Context, in *RestTaskRequest, opts ...grpc.CallOption) (*RestTaskResponse, error)
-	CompeteTask(ctx context.Context, in *CompleteTaskRequest, opts ...grpc.CallOption) (*CompleteTaskResponse, error)
-	UnCompeteTask(ctx context.Context, in *UnCompleteTaskRequest, opts ...grpc.CallOption) (*UnCompleteTaskResponse, error)
+	CompleteTask(ctx context.Context, in *CompleteTaskRequest, opts ...grpc.CallOption) (*CompleteTaskResponse, error)
+	UnCompleteTask(ctx context.Context, in *UnCompleteTaskRequest, opts ...grpc.CallOption) (*UnCompleteTaskResponse, error)
 }
 
 type taskServiceClient struct {
@@ -147,20 +147,20 @@ func (c *taskServiceClient) RestTask(ctx context.Context, in *RestTaskRequest, o
 	return out, nil
 }
 
-func (c *taskServiceClient) CompeteTask(ctx context.Context, in *CompleteTaskRequest, opts ...grpc.CallOption) (*CompleteTaskResponse, error) {
+func (c *taskServiceClient) CompleteTask(ctx context.Context, in *CompleteTaskRequest, opts ...grpc.CallOption) (*CompleteTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CompleteTaskResponse)
-	err := c.cc.Invoke(ctx, TaskService_CompeteTask_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TaskService_CompleteTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskServiceClient) UnCompeteTask(ctx context.Context, in *UnCompleteTaskRequest, opts ...grpc.CallOption) (*UnCompleteTaskResponse, error) {
+func (c *taskServiceClient) UnCompleteTask(ctx context.Context, in *UnCompleteTaskRequest, opts ...grpc.CallOption) (*UnCompleteTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UnCompleteTaskResponse)
-	err := c.cc.Invoke(ctx, TaskService_UnCompeteTask_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TaskService_UnCompleteTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -180,8 +180,8 @@ type TaskServiceServer interface {
 	DeleteTask(context.Context, *DeleteTaskRequest) (*DeleteTaskResponse, error)
 	GetTasks(context.Context, *GetTasksRequest) (*GetTasksResponse, error)
 	RestTask(context.Context, *RestTaskRequest) (*RestTaskResponse, error)
-	CompeteTask(context.Context, *CompleteTaskRequest) (*CompleteTaskResponse, error)
-	UnCompeteTask(context.Context, *UnCompleteTaskRequest) (*UnCompleteTaskResponse, error)
+	CompleteTask(context.Context, *CompleteTaskRequest) (*CompleteTaskResponse, error)
+	UnCompleteTask(context.Context, *UnCompleteTaskRequest) (*UnCompleteTaskResponse, error)
 	mustEmbedUnimplementedTaskServiceServer()
 }
 
@@ -216,11 +216,11 @@ func (UnimplementedTaskServiceServer) GetTasks(context.Context, *GetTasksRequest
 func (UnimplementedTaskServiceServer) RestTask(context.Context, *RestTaskRequest) (*RestTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RestTask not implemented")
 }
-func (UnimplementedTaskServiceServer) CompeteTask(context.Context, *CompleteTaskRequest) (*CompleteTaskResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompeteTask not implemented")
+func (UnimplementedTaskServiceServer) CompleteTask(context.Context, *CompleteTaskRequest) (*CompleteTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompleteTask not implemented")
 }
-func (UnimplementedTaskServiceServer) UnCompeteTask(context.Context, *UnCompleteTaskRequest) (*UnCompleteTaskResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UnCompeteTask not implemented")
+func (UnimplementedTaskServiceServer) UnCompleteTask(context.Context, *UnCompleteTaskRequest) (*UnCompleteTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnCompleteTask not implemented")
 }
 func (UnimplementedTaskServiceServer) mustEmbedUnimplementedTaskServiceServer() {}
 
@@ -397,38 +397,38 @@ func _TaskService_RestTask_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskService_CompeteTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TaskService_CompleteTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CompleteTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskServiceServer).CompeteTask(ctx, in)
+		return srv.(TaskServiceServer).CompleteTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskService_CompeteTask_FullMethodName,
+		FullMethod: TaskService_CompleteTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServiceServer).CompeteTask(ctx, req.(*CompleteTaskRequest))
+		return srv.(TaskServiceServer).CompleteTask(ctx, req.(*CompleteTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TaskService_UnCompeteTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TaskService_UnCompleteTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UnCompleteTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskServiceServer).UnCompeteTask(ctx, in)
+		return srv.(TaskServiceServer).UnCompleteTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TaskService_UnCompeteTask_FullMethodName,
+		FullMethod: TaskService_UnCompleteTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServiceServer).UnCompeteTask(ctx, req.(*UnCompleteTaskRequest))
+		return srv.(TaskServiceServer).UnCompleteTask(ctx, req.(*UnCompleteTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -477,12 +477,12 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TaskService_RestTask_Handler,
 		},
 		{
-			MethodName: "CompeteTask",
-			Handler:    _TaskService_CompeteTask_Handler,
+			MethodName: "CompleteTask",
+			Handler:    _TaskService_CompleteTask_Handler,
 		},
 		{
-			MethodName: "UnCompeteTask",
-			Handler:    _TaskService_UnCompeteTask_Handler,
+			MethodName: "UnCompleteTask",
+			Handler:    _TaskService_UnCompleteTask_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
