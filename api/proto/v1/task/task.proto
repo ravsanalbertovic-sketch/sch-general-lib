@@ -83,16 +83,15 @@ message TaskImage {
 message Task {
   string id = 1;
   string name = 2;
-  string  user_id = 3;
-  string description = 4;
-  string relation = 5;
-  bool rest = 6;
-  bool in_buf = 7;
-  int32 important = 8;
-  int32 difficult = 9;
-  int64 deadline = 10;
-  int64 work_time = 11;
-  google.protobuf.Timestamp started_at = 12;
+  string description = 3;
+  string relation = 4;
+  bool rest = 5;
+  bool in_buf = 6;
+  int32 important = 7;
+  int32 difficult = 8;
+  int64 deadline = 9;
+  int64 work_time = 10;
+  google.protobuf.Timestamp started_at = 11;
 }
 
 message CreateTaskRequest {
