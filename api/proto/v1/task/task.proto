@@ -4,7 +4,7 @@ package task;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/ravsanalbertovic-sketch/scheduler-general-lib/tree/dev/api/pb/v1/task;taskv1";
+option go_package = "github.com/ravsanalbertovic-sketch/scheduler-general-lib/tree/main/api/pb/v1/task;taskv1";
 
 service TaskService {
   rpc CreateTaskImage (CreateTaskImageRequest) returns (CreateTaskImageResponse);
