@@ -7,7 +7,7 @@ option go_package = "github.com/ravsanalbertovic-sketch/scheduler-general-lib/tr
 service AuthService {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
-  rpc RefreshTokens(RefreshTokensRequest) returns (RefreshTokensResponse);
+  rpc RefreshTokens(RefreshTokensRequest) returns (RefreshTokensResponse); // обновляет refresh и access токены
 }
 
 message RegisterRequest {
