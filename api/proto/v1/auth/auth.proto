@@ -8,10 +8,16 @@ service AuthService {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
   rpc RefreshTokens(RefreshTokensRequest) returns (RefreshTokensResponse); // обновляет refresh и access токены
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+  rpc GetUsers (GetUsersRequest ) returns (GetUsersResponse);
+  rpc GetUserEmailByUUID (GetUserEmailByUUIDRequest) returns (GetUserEmailByUUIDResponse);
+  rpc GetUserUUIDByEmail (GetUserUUIDByEmailRequest) returns (GetUserUUIDByEmailResponse);
+  rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
+  rpc RegisterAdmin (RegisterAdminRequest) returns (RegisterAdminResponse);
 }
 
 message RegisterRequest {
-  string mail = 1;
+  string email = 1;
   string password = 2;
 }
 
@@ -20,7 +26,7 @@ message RegisterResponse {
 }
 
 message LoginRequest {
-  string mail = 1;
+  string email = 1;
   string password = 2;
 }
 
@@ -36,4 +42,57 @@ message RefreshTokensRequest {
 message RefreshTokensResponse {
   string access_token = 1;
   string refresh_token = 2;
+}
+
+message DeleteUserRequest {
+  string uuid = 1;
+}
+
+message DeleteUserResponse {
+  bool success = 1;
+}
+
+message GetUsersRequest {}
+
+message GetUsersResponse {
+  repeated User users = 1;
+}
+
+message GetUserEmailByUUIDRequest {
+  string uuid = 1;
+}
+
+message GetUserEmailByUUIDResponse {
+  string email = 1;
+}
+
+message GetUserUUIDByEmailRequest {
+  string email = 1;
+}
+
+message GetUserUUIDByEmailResponse {
+  string uuid = 1;
+}
+
+message IsAdminRequest {
+  string uuid = 1;
+}
+
+message IsAdminResponse {
+  bool success = 1;
+}
+
+message RegisterAdminRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message RegisterAdminResponse {
+  bool success = 1;
+}
+
+message User {
+  string uuid = 1;
+  string email = 2;
+  string password = 3;
 }

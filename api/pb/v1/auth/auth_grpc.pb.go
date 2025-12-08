@@ -19,9 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	AuthService_Register_FullMethodName      = "/auth.AuthService/Register"
-	AuthService_Login_FullMethodName         = "/auth.AuthService/Login"
-	AuthService_RefreshTokens_FullMethodName = "/auth.AuthService/RefreshTokens"
+	AuthService_Register_FullMethodName           = "/auth.AuthService/Register"
+	AuthService_Login_FullMethodName              = "/auth.AuthService/Login"
+	AuthService_RefreshTokens_FullMethodName      = "/auth.AuthService/RefreshTokens"
+	AuthService_DeleteUser_FullMethodName         = "/auth.AuthService/DeleteUser"
+	AuthService_GetUsers_FullMethodName           = "/auth.AuthService/GetUsers"
+	AuthService_GetUserEmailByUUID_FullMethodName = "/auth.AuthService/GetUserEmailByUUID"
+	AuthService_GetUserUUIDByEmail_FullMethodName = "/auth.AuthService/GetUserUUIDByEmail"
+	AuthService_IsAdmin_FullMethodName            = "/auth.AuthService/IsAdmin"
+	AuthService_RegisterAdmin_FullMethodName      = "/auth.AuthService/RegisterAdmin"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -31,6 +37,12 @@ type AuthServiceClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	RefreshTokens(ctx context.Context, in *RefreshTokensRequest, opts ...grpc.CallOption) (*RefreshTokensResponse, error)
+	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
+	GetUsers(ctx context.Context, in *GetUsersRequest, opts ...grpc.CallOption) (*GetUsersResponse, error)
+	GetUserEmailByUUID(ctx context.Context, in *GetUserEmailByUUIDRequest, opts ...grpc.CallOption) (*GetUserEmailByUUIDResponse, error)
+	GetUserUUIDByEmail(ctx context.Context, in *GetUserUUIDByEmailRequest, opts ...grpc.CallOption) (*GetUserUUIDByEmailResponse, error)
+	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
+	RegisterAdmin(ctx context.Context, in *RegisterAdminRequest, opts ...grpc.CallOption) (*RegisterAdminResponse, error)
 }
 
 type authServiceClient struct {
@@ -71,6 +83,66 @@ func (c *authServiceClient) RefreshTokens(ctx context.Context, in *RefreshTokens
 	return out, nil
 }
 
+func (c *authServiceClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteUserResponse)
+	err := c.cc.Invoke(ctx, AuthService_DeleteUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) GetUsers(ctx context.Context, in *GetUsersRequest, opts ...grpc.CallOption) (*GetUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUsersResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) GetUserEmailByUUID(ctx context.Context, in *GetUserEmailByUUIDRequest, opts ...grpc.CallOption) (*GetUserEmailByUUIDResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserEmailByUUIDResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetUserEmailByUUID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) GetUserUUIDByEmail(ctx context.Context, in *GetUserUUIDByEmailRequest, opts ...grpc.CallOption) (*GetUserUUIDByEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserUUIDByEmailResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetUserUUIDByEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsAdminResponse)
+	err := c.cc.Invoke(ctx, AuthService_IsAdmin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) RegisterAdmin(ctx context.Context, in *RegisterAdminRequest, opts ...grpc.CallOption) (*RegisterAdminResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterAdminResponse)
+	err := c.cc.Invoke(ctx, AuthService_RegisterAdmin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServiceServer is the server API for AuthService service.
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility
@@ -78,6 +150,12 @@ type AuthServiceServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	RefreshTokens(context.Context, *RefreshTokensRequest) (*RefreshTokensResponse, error)
+	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
+	GetUsers(context.Context, *GetUsersRequest) (*GetUsersResponse, error)
+	GetUserEmailByUUID(context.Context, *GetUserEmailByUUIDRequest) (*GetUserEmailByUUIDResponse, error)
+	GetUserUUIDByEmail(context.Context, *GetUserUUIDByEmailRequest) (*GetUserUUIDByEmailResponse, error)
+	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
+	RegisterAdmin(context.Context, *RegisterAdminRequest) (*RegisterAdminResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -93,6 +171,24 @@ func (UnimplementedAuthServiceServer) Login(context.Context, *LoginRequest) (*Lo
 }
 func (UnimplementedAuthServiceServer) RefreshTokens(context.Context, *RefreshTokensRequest) (*RefreshTokensResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshTokens not implemented")
+}
+func (UnimplementedAuthServiceServer) DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (UnimplementedAuthServiceServer) GetUsers(context.Context, *GetUsersRequest) (*GetUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUsers not implemented")
+}
+func (UnimplementedAuthServiceServer) GetUserEmailByUUID(context.Context, *GetUserEmailByUUIDRequest) (*GetUserEmailByUUIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserEmailByUUID not implemented")
+}
+func (UnimplementedAuthServiceServer) GetUserUUIDByEmail(context.Context, *GetUserUUIDByEmailRequest) (*GetUserUUIDByEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserUUIDByEmail not implemented")
+}
+func (UnimplementedAuthServiceServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IsAdmin not implemented")
+}
+func (UnimplementedAuthServiceServer) RegisterAdmin(context.Context, *RegisterAdminRequest) (*RegisterAdminResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterAdmin not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 
@@ -161,6 +257,114 @@ func _AuthService_RefreshTokens_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).DeleteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_DeleteUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).DeleteUser(ctx, req.(*DeleteUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_GetUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetUsers(ctx, req.(*GetUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_GetUserEmailByUUID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserEmailByUUIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetUserEmailByUUID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetUserEmailByUUID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetUserEmailByUUID(ctx, req.(*GetUserEmailByUUIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_GetUserUUIDByEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserUUIDByEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetUserUUIDByEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetUserUUIDByEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetUserUUIDByEmail(ctx, req.(*GetUserUUIDByEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_IsAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsAdminRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).IsAdmin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_IsAdmin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).IsAdmin(ctx, req.(*IsAdminRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_RegisterAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterAdminRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).RegisterAdmin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_RegisterAdmin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).RegisterAdmin(ctx, req.(*RegisterAdminRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -179,6 +383,30 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RefreshTokens",
 			Handler:    _AuthService_RefreshTokens_Handler,
+		},
+		{
+			MethodName: "DeleteUser",
+			Handler:    _AuthService_DeleteUser_Handler,
+		},
+		{
+			MethodName: "GetUsers",
+			Handler:    _AuthService_GetUsers_Handler,
+		},
+		{
+			MethodName: "GetUserEmailByUUID",
+			Handler:    _AuthService_GetUserEmailByUUID_Handler,
+		},
+		{
+			MethodName: "GetUserUUIDByEmail",
+			Handler:    _AuthService_GetUserUUIDByEmail_Handler,
+		},
+		{
+			MethodName: "IsAdmin",
+			Handler:    _AuthService_IsAdmin_Handler,
+		},
+		{
+			MethodName: "RegisterAdmin",
+			Handler:    _AuthService_RegisterAdmin_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
