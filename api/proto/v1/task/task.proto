@@ -30,7 +30,7 @@ message CreateTaskImageRequest {
 }
 
 message CreateTaskImageResponse {
-    int64 id = 1;
+  bool success = 1;
 }
 
 message GetTaskImagesRequest {
