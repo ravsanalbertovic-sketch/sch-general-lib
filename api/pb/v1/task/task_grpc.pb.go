@@ -19,17 +19,29 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	TaskService_CreateTaskImage_FullMethodName = "/task.TaskService/CreateTaskImage"
-	TaskService_GetTaskImages_FullMethodName   = "/task.TaskService/GetTaskImages"
-	TaskService_GetTaskImage_FullMethodName    = "/task.TaskService/GetTaskImage"
-	TaskService_UpdateTaskImage_FullMethodName = "/task.TaskService/UpdateTaskImage"
-	TaskService_DeleteTaskImage_FullMethodName = "/task.TaskService/DeleteTaskImage"
-	TaskService_CreateTask_FullMethodName      = "/task.TaskService/CreateTask"
-	TaskService_DeleteTask_FullMethodName      = "/task.TaskService/DeleteTask"
-	TaskService_GetTasks_FullMethodName        = "/task.TaskService/GetTasks"
-	TaskService_RestTask_FullMethodName        = "/task.TaskService/RestTask"
-	TaskService_CompleteTask_FullMethodName    = "/task.TaskService/CompleteTask"
-	TaskService_UnCompleteTask_FullMethodName  = "/task.TaskService/UnCompleteTask"
+	TaskService_CreateTaskImage_FullMethodName             = "/task.TaskService/CreateTaskImage"
+	TaskService_GetTaskImages_FullMethodName               = "/task.TaskService/GetTaskImages"
+	TaskService_GetTaskImage_FullMethodName                = "/task.TaskService/GetTaskImage"
+	TaskService_UpdateTaskImage_FullMethodName             = "/task.TaskService/UpdateTaskImage"
+	TaskService_DeleteTaskImage_FullMethodName             = "/task.TaskService/DeleteTaskImage"
+	TaskService_CreateTask_FullMethodName                  = "/task.TaskService/CreateTask"
+	TaskService_DeleteTask_FullMethodName                  = "/task.TaskService/DeleteTask"
+	TaskService_GetTasks_FullMethodName                    = "/task.TaskService/GetTasks"
+	TaskService_RestTask_FullMethodName                    = "/task.TaskService/RestTask"
+	TaskService_CompleteTask_FullMethodName                = "/task.TaskService/CompleteTask"
+	TaskService_UnCompleteTask_FullMethodName              = "/task.TaskService/UnCompleteTask"
+	TaskService_AddTaskToDay_FullMethodName                = "/task.TaskService/AddTaskToDay"
+	TaskService_DeleteTaskFromDay_FullMethodName           = "/task.TaskService/DeleteTaskFromDay"
+	TaskService_GetTasksFromDay_FullMethodName             = "/task.TaskService/GetTasksFromDay"
+	TaskService_GetTasksFromDayForScheduler_FullMethodName = "/task.TaskService/GetTasksFromDayForScheduler"
+	TaskService_CreateTaskDay_FullMethodName               = "/task.TaskService/CreateTaskDay"
+	TaskService_GetTaskDays_FullMethodName                 = "/task.TaskService/GetTaskDays"
+	TaskService_DeleteTaskDay_FullMethodName               = "/task.TaskService/DeleteTaskDay"
+	TaskService_CreateTaskRepeater_FullMethodName          = "/task.TaskService/CreateTaskRepeater"
+	TaskService_GetTaskRepeater_FullMethodName             = "/task.TaskService/GetTaskRepeater"
+	TaskService_GetTaskRepeaters_FullMethodName            = "/task.TaskService/GetTaskRepeaters"
+	TaskService_UpdateTaskRepeater_FullMethodName          = "/task.TaskService/UpdateTaskRepeater"
+	TaskService_DeleteTaskRepeater_FullMethodName          = "/task.TaskService/DeleteTaskRepeater"
 )
 
 // TaskServiceClient is the client API for TaskService service.
@@ -47,6 +59,18 @@ type TaskServiceClient interface {
 	RestTask(ctx context.Context, in *RestTaskRequest, opts ...grpc.CallOption) (*RestTaskResponse, error)
 	CompleteTask(ctx context.Context, in *CompleteTaskRequest, opts ...grpc.CallOption) (*CompleteTaskResponse, error)
 	UnCompleteTask(ctx context.Context, in *UnCompleteTaskRequest, opts ...grpc.CallOption) (*UnCompleteTaskResponse, error)
+	AddTaskToDay(ctx context.Context, in *AddTaskToDayRequest, opts ...grpc.CallOption) (*AddTaskToDayResponse, error)
+	DeleteTaskFromDay(ctx context.Context, in *DeleteTaskFromDayRequest, opts ...grpc.CallOption) (*DeleteTaskFromDayResponse, error)
+	GetTasksFromDay(ctx context.Context, in *GetTasksFromDayRequest, opts ...grpc.CallOption) (*GetTasksFromDayResponse, error)
+	GetTasksFromDayForScheduler(ctx context.Context, in *GetTasksFromDayForSchedulerRequest, opts ...grpc.CallOption) (*GetTasksFromDayForSchedulerResponse, error)
+	CreateTaskDay(ctx context.Context, in *CreateTaskDayRequest, opts ...grpc.CallOption) (*CreateTaskDayResponse, error)
+	GetTaskDays(ctx context.Context, in *GetTaskDaysRequest, opts ...grpc.CallOption) (*GetTaskDaysResponse, error)
+	DeleteTaskDay(ctx context.Context, in *DeleteTaskDayRequest, opts ...grpc.CallOption) (*DeleteTaskDayResponse, error)
+	CreateTaskRepeater(ctx context.Context, in *CreateTaskRepeaterRequest, opts ...grpc.CallOption) (*CreateTaskRepeaterResponse, error)
+	GetTaskRepeater(ctx context.Context, in *GetTaskRepeaterRequest, opts ...grpc.CallOption) (*GetTaskRepeaterResponse, error)
+	GetTaskRepeaters(ctx context.Context, in *GetTaskRepeatersRequest, opts ...grpc.CallOption) (*GetTaskRepeatersResponse, error)
+	UpdateTaskRepeater(ctx context.Context, in *UpdateTaskRepeaterRequest, opts ...grpc.CallOption) (*UpdateTaskRepeaterResponse, error)
+	DeleteTaskRepeater(ctx context.Context, in *DeleteTaskRepeaterRequest, opts ...grpc.CallOption) (*DeleteTaskRepeaterResponse, error)
 }
 
 type taskServiceClient struct {
@@ -167,6 +191,126 @@ func (c *taskServiceClient) UnCompleteTask(ctx context.Context, in *UnCompleteTa
 	return out, nil
 }
 
+func (c *taskServiceClient) AddTaskToDay(ctx context.Context, in *AddTaskToDayRequest, opts ...grpc.CallOption) (*AddTaskToDayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddTaskToDayResponse)
+	err := c.cc.Invoke(ctx, TaskService_AddTaskToDay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) DeleteTaskFromDay(ctx context.Context, in *DeleteTaskFromDayRequest, opts ...grpc.CallOption) (*DeleteTaskFromDayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTaskFromDayResponse)
+	err := c.cc.Invoke(ctx, TaskService_DeleteTaskFromDay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) GetTasksFromDay(ctx context.Context, in *GetTasksFromDayRequest, opts ...grpc.CallOption) (*GetTasksFromDayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTasksFromDayResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetTasksFromDay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) GetTasksFromDayForScheduler(ctx context.Context, in *GetTasksFromDayForSchedulerRequest, opts ...grpc.CallOption) (*GetTasksFromDayForSchedulerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTasksFromDayForSchedulerResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetTasksFromDayForScheduler_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) CreateTaskDay(ctx context.Context, in *CreateTaskDayRequest, opts ...grpc.CallOption) (*CreateTaskDayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTaskDayResponse)
+	err := c.cc.Invoke(ctx, TaskService_CreateTaskDay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) GetTaskDays(ctx context.Context, in *GetTaskDaysRequest, opts ...grpc.CallOption) (*GetTaskDaysResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTaskDaysResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetTaskDays_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) DeleteTaskDay(ctx context.Context, in *DeleteTaskDayRequest, opts ...grpc.CallOption) (*DeleteTaskDayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTaskDayResponse)
+	err := c.cc.Invoke(ctx, TaskService_DeleteTaskDay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) CreateTaskRepeater(ctx context.Context, in *CreateTaskRepeaterRequest, opts ...grpc.CallOption) (*CreateTaskRepeaterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTaskRepeaterResponse)
+	err := c.cc.Invoke(ctx, TaskService_CreateTaskRepeater_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) GetTaskRepeater(ctx context.Context, in *GetTaskRepeaterRequest, opts ...grpc.CallOption) (*GetTaskRepeaterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTaskRepeaterResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetTaskRepeater_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) GetTaskRepeaters(ctx context.Context, in *GetTaskRepeatersRequest, opts ...grpc.CallOption) (*GetTaskRepeatersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTaskRepeatersResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetTaskRepeaters_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) UpdateTaskRepeater(ctx context.Context, in *UpdateTaskRepeaterRequest, opts ...grpc.CallOption) (*UpdateTaskRepeaterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTaskRepeaterResponse)
+	err := c.cc.Invoke(ctx, TaskService_UpdateTaskRepeater_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskServiceClient) DeleteTaskRepeater(ctx context.Context, in *DeleteTaskRepeaterRequest, opts ...grpc.CallOption) (*DeleteTaskRepeaterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTaskRepeaterResponse)
+	err := c.cc.Invoke(ctx, TaskService_DeleteTaskRepeater_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TaskServiceServer is the server API for TaskService service.
 // All implementations must embed UnimplementedTaskServiceServer
 // for forward compatibility
@@ -182,6 +326,18 @@ type TaskServiceServer interface {
 	RestTask(context.Context, *RestTaskRequest) (*RestTaskResponse, error)
 	CompleteTask(context.Context, *CompleteTaskRequest) (*CompleteTaskResponse, error)
 	UnCompleteTask(context.Context, *UnCompleteTaskRequest) (*UnCompleteTaskResponse, error)
+	AddTaskToDay(context.Context, *AddTaskToDayRequest) (*AddTaskToDayResponse, error)
+	DeleteTaskFromDay(context.Context, *DeleteTaskFromDayRequest) (*DeleteTaskFromDayResponse, error)
+	GetTasksFromDay(context.Context, *GetTasksFromDayRequest) (*GetTasksFromDayResponse, error)
+	GetTasksFromDayForScheduler(context.Context, *GetTasksFromDayForSchedulerRequest) (*GetTasksFromDayForSchedulerResponse, error)
+	CreateTaskDay(context.Context, *CreateTaskDayRequest) (*CreateTaskDayResponse, error)
+	GetTaskDays(context.Context, *GetTaskDaysRequest) (*GetTaskDaysResponse, error)
+	DeleteTaskDay(context.Context, *DeleteTaskDayRequest) (*DeleteTaskDayResponse, error)
+	CreateTaskRepeater(context.Context, *CreateTaskRepeaterRequest) (*CreateTaskRepeaterResponse, error)
+	GetTaskRepeater(context.Context, *GetTaskRepeaterRequest) (*GetTaskRepeaterResponse, error)
+	GetTaskRepeaters(context.Context, *GetTaskRepeatersRequest) (*GetTaskRepeatersResponse, error)
+	UpdateTaskRepeater(context.Context, *UpdateTaskRepeaterRequest) (*UpdateTaskRepeaterResponse, error)
+	DeleteTaskRepeater(context.Context, *DeleteTaskRepeaterRequest) (*DeleteTaskRepeaterResponse, error)
 	mustEmbedUnimplementedTaskServiceServer()
 }
 
@@ -221,6 +377,42 @@ func (UnimplementedTaskServiceServer) CompleteTask(context.Context, *CompleteTas
 }
 func (UnimplementedTaskServiceServer) UnCompleteTask(context.Context, *UnCompleteTaskRequest) (*UnCompleteTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnCompleteTask not implemented")
+}
+func (UnimplementedTaskServiceServer) AddTaskToDay(context.Context, *AddTaskToDayRequest) (*AddTaskToDayResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddTaskToDay not implemented")
+}
+func (UnimplementedTaskServiceServer) DeleteTaskFromDay(context.Context, *DeleteTaskFromDayRequest) (*DeleteTaskFromDayResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTaskFromDay not implemented")
+}
+func (UnimplementedTaskServiceServer) GetTasksFromDay(context.Context, *GetTasksFromDayRequest) (*GetTasksFromDayResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTasksFromDay not implemented")
+}
+func (UnimplementedTaskServiceServer) GetTasksFromDayForScheduler(context.Context, *GetTasksFromDayForSchedulerRequest) (*GetTasksFromDayForSchedulerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTasksFromDayForScheduler not implemented")
+}
+func (UnimplementedTaskServiceServer) CreateTaskDay(context.Context, *CreateTaskDayRequest) (*CreateTaskDayResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTaskDay not implemented")
+}
+func (UnimplementedTaskServiceServer) GetTaskDays(context.Context, *GetTaskDaysRequest) (*GetTaskDaysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTaskDays not implemented")
+}
+func (UnimplementedTaskServiceServer) DeleteTaskDay(context.Context, *DeleteTaskDayRequest) (*DeleteTaskDayResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTaskDay not implemented")
+}
+func (UnimplementedTaskServiceServer) CreateTaskRepeater(context.Context, *CreateTaskRepeaterRequest) (*CreateTaskRepeaterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTaskRepeater not implemented")
+}
+func (UnimplementedTaskServiceServer) GetTaskRepeater(context.Context, *GetTaskRepeaterRequest) (*GetTaskRepeaterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTaskRepeater not implemented")
+}
+func (UnimplementedTaskServiceServer) GetTaskRepeaters(context.Context, *GetTaskRepeatersRequest) (*GetTaskRepeatersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTaskRepeaters not implemented")
+}
+func (UnimplementedTaskServiceServer) UpdateTaskRepeater(context.Context, *UpdateTaskRepeaterRequest) (*UpdateTaskRepeaterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaskRepeater not implemented")
+}
+func (UnimplementedTaskServiceServer) DeleteTaskRepeater(context.Context, *DeleteTaskRepeaterRequest) (*DeleteTaskRepeaterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTaskRepeater not implemented")
 }
 func (UnimplementedTaskServiceServer) mustEmbedUnimplementedTaskServiceServer() {}
 
@@ -433,6 +625,222 @@ func _TaskService_UnCompleteTask_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TaskService_AddTaskToDay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTaskToDayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).AddTaskToDay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_AddTaskToDay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).AddTaskToDay(ctx, req.(*AddTaskToDayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_DeleteTaskFromDay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTaskFromDayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).DeleteTaskFromDay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_DeleteTaskFromDay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).DeleteTaskFromDay(ctx, req.(*DeleteTaskFromDayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_GetTasksFromDay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTasksFromDayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).GetTasksFromDay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_GetTasksFromDay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).GetTasksFromDay(ctx, req.(*GetTasksFromDayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_GetTasksFromDayForScheduler_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTasksFromDayForSchedulerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).GetTasksFromDayForScheduler(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_GetTasksFromDayForScheduler_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).GetTasksFromDayForScheduler(ctx, req.(*GetTasksFromDayForSchedulerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_CreateTaskDay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTaskDayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).CreateTaskDay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_CreateTaskDay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).CreateTaskDay(ctx, req.(*CreateTaskDayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_GetTaskDays_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTaskDaysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).GetTaskDays(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_GetTaskDays_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).GetTaskDays(ctx, req.(*GetTaskDaysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_DeleteTaskDay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTaskDayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).DeleteTaskDay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_DeleteTaskDay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).DeleteTaskDay(ctx, req.(*DeleteTaskDayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_CreateTaskRepeater_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTaskRepeaterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).CreateTaskRepeater(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_CreateTaskRepeater_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).CreateTaskRepeater(ctx, req.(*CreateTaskRepeaterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_GetTaskRepeater_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTaskRepeaterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).GetTaskRepeater(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_GetTaskRepeater_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).GetTaskRepeater(ctx, req.(*GetTaskRepeaterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_GetTaskRepeaters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTaskRepeatersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).GetTaskRepeaters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_GetTaskRepeaters_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).GetTaskRepeaters(ctx, req.(*GetTaskRepeatersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_UpdateTaskRepeater_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaskRepeaterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).UpdateTaskRepeater(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_UpdateTaskRepeater_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).UpdateTaskRepeater(ctx, req.(*UpdateTaskRepeaterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TaskService_DeleteTaskRepeater_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTaskRepeaterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).DeleteTaskRepeater(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_DeleteTaskRepeater_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).DeleteTaskRepeater(ctx, req.(*DeleteTaskRepeaterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TaskService_ServiceDesc is the grpc.ServiceDesc for TaskService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -483,6 +891,54 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UnCompleteTask",
 			Handler:    _TaskService_UnCompleteTask_Handler,
+		},
+		{
+			MethodName: "AddTaskToDay",
+			Handler:    _TaskService_AddTaskToDay_Handler,
+		},
+		{
+			MethodName: "DeleteTaskFromDay",
+			Handler:    _TaskService_DeleteTaskFromDay_Handler,
+		},
+		{
+			MethodName: "GetTasksFromDay",
+			Handler:    _TaskService_GetTasksFromDay_Handler,
+		},
+		{
+			MethodName: "GetTasksFromDayForScheduler",
+			Handler:    _TaskService_GetTasksFromDayForScheduler_Handler,
+		},
+		{
+			MethodName: "CreateTaskDay",
+			Handler:    _TaskService_CreateTaskDay_Handler,
+		},
+		{
+			MethodName: "GetTaskDays",
+			Handler:    _TaskService_GetTaskDays_Handler,
+		},
+		{
+			MethodName: "DeleteTaskDay",
+			Handler:    _TaskService_DeleteTaskDay_Handler,
+		},
+		{
+			MethodName: "CreateTaskRepeater",
+			Handler:    _TaskService_CreateTaskRepeater_Handler,
+		},
+		{
+			MethodName: "GetTaskRepeater",
+			Handler:    _TaskService_GetTaskRepeater_Handler,
+		},
+		{
+			MethodName: "GetTaskRepeaters",
+			Handler:    _TaskService_GetTaskRepeaters_Handler,
+		},
+		{
+			MethodName: "UpdateTaskRepeater",
+			Handler:    _TaskService_UpdateTaskRepeater_Handler,
+		},
+		{
+			MethodName: "DeleteTaskRepeater",
+			Handler:    _TaskService_DeleteTaskRepeater_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

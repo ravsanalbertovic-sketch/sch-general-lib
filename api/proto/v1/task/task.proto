@@ -16,26 +16,41 @@ service TaskService {
   rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse);
   rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskResponse);
   rpc GetTasks (GetTasksRequest) returns (GetTasksResponse);
-  rpc RestTask ( RestTaskRequest) returns (RestTaskResponse);
+  rpc RestTask (RestTaskRequest) returns (RestTaskResponse);
   rpc CompleteTask (CompleteTaskRequest) returns (CompleteTaskResponse);
   rpc UnCompleteTask (UnCompleteTaskRequest) returns (UnCompleteTaskResponse);
+
+  rpc AddTaskToDay (AddTaskToDayRequest) returns (AddTaskToDayResponse);
+  rpc DeleteTaskFromDay (DeleteTaskFromDayRequest) returns (DeleteTaskFromDayResponse);
+  rpc GetTasksFromDay (GetTasksFromDayRequest) returns (GetTasksFromDayResponse);
+  rpc GetTasksFromDayForScheduler (GetTasksFromDayForSchedulerRequest) returns (GetTasksFromDayForSchedulerResponse);
+
+  rpc CreateTaskDay (CreateTaskDayRequest) returns (CreateTaskDayResponse);
+  rpc GetTaskDays (GetTaskDaysRequest) returns (GetTaskDaysResponse);
+  rpc DeleteTaskDay (DeleteTaskDayRequest) returns (DeleteTaskDayResponse);
+
+  rpc CreateTaskRepeater (CreateTaskRepeaterRequest) returns (CreateTaskRepeaterResponse);
+  rpc GetTaskRepeater (GetTaskRepeaterRequest) returns (GetTaskRepeaterResponse);
+  rpc GetTaskRepeaters (GetTaskRepeatersRequest) returns (GetTaskRepeatersResponse);
+  rpc UpdateTaskRepeater (UpdateTaskRepeaterRequest) returns (UpdateTaskRepeaterResponse);
+  rpc DeleteTaskRepeater (DeleteTaskRepeaterRequest) returns (DeleteTaskRepeaterResponse);
+
+  //rpc  (Request) returns (Response);
 }
 
+//req/res
 message CreateTaskImageRequest {
   string name = 1;
-  string user_uuid = 2;
-  string description = 3;
-  int32 important = 4;
-  int32 difficult = 5;
+  string description = 2;
+  int32 important = 3;
+  int32 difficult = 4;
 }
 
 message CreateTaskImageResponse {
   bool success = 1;
 }
 
-message GetTaskImagesRequest {
-  string user_uuid = 1;
-}
+message GetTaskImagesRequest {}
 
 message GetTaskImagesResponse {
   repeated TaskImage tasks = 1;
@@ -69,38 +84,15 @@ message DeleteTaskImageResponse{
   bool success = 1;
 }
 
-message TaskImage {
-  int64 id = 1;
-  string name = 2;
-  string  user_id = 3;
-  string description = 4;
-  int32 important = 5;
-  int32 difficult = 6;
-  google.protobuf.Timestamp created_at = 7;
-  google.protobuf.Timestamp updated_at = 8;
-}
-
-message Task {
-  string id = 1;
-  string name = 2;
-  string description = 3;
-  string relation = 4;
-  bool rest = 5;
-  bool in_buf = 6;
-  int32 important = 7;
-  int32 difficult = 8;
-  int64 deadline = 9;
-  int64 work_time = 10;
-  google.protobuf.Timestamp started_at = 11;
-}
 
 message CreateTaskRequest {
   int64 id = 1; // taskImageID
   string description = 2;
   string relation = 3;
-  int32 important = 4; // если null то брать из taskImage
-  int32 difficult = 5; // если null то брать из taskImage
-  int64 deadline = 6;
+  bool clinch = 4;
+  int32 important = 5; // если null то брать из taskImage
+  int32 difficult = 6; // если null то брать из taskImage
+  int32 deadline = 7;
 }
 
 message CreateTaskResponse {
@@ -115,9 +107,7 @@ message DeleteTaskResponse {
   bool success = 1;
 }
 
-message GetTasksRequest {
-  string user_uuid = 1;
-}
+message GetTasksRequest {}
 
 message GetTasksResponse {
   repeated Task tasks = 1;
@@ -145,4 +135,171 @@ message UnCompleteTaskRequest {
 
 message UnCompleteTaskResponse {
   bool success = 1;
+}
+
+message CreateTaskRepeaterRequest {
+  int64 task_image_id = 1;
+  bool clinch = 2;
+  int32 deadline = 3;
+  string time_of_day = 4;
+  string interval_type = 5;
+  int32 interval_value = 6;
+  int32 weekday = 7;
+  google.protobuf.Timestamp start_date = 8;
+}
+
+message CreateTaskRepeaterResponse {
+  bool success = 1;
+}
+
+message GetTaskRepeatersRequest {}
+
+message GetTaskRepeatersResponse {
+  repeated TaskRepeater task_repeaters = 1;
+}
+
+message GetTaskRepeaterRequest {
+  string id = 1;
+}
+
+message GetTaskRepeaterResponse {
+  TaskRepeater task_repeaters = 1;
+}
+
+message UpdateTaskRepeaterRequest{
+  string id = 1;
+  bool clinch = 2;
+  int32 deadline = 3;
+  string time_of_day = 4;
+  string interval_type = 5;
+  int32 interval_value = 6;
+  int32 weekday = 7;
+  google.protobuf.Timestamp start_date = 8;
+}
+
+message UpdateTaskRepeaterResponse{
+  bool success = 1;
+}
+
+message DeleteTaskRepeaterRequest{
+  int64 id = 1;
+}
+
+message DeleteTaskRepeaterResponse{
+  bool success = 1;
+}
+
+message AddTaskToDayRequest{
+  string task_id = 1;
+  google.protobuf.Timestamp day_date = 2;
+}
+
+message AddTaskToDayResponse{
+  bool success = 1;
+}
+
+message DeleteTaskFromDayRequest{
+  string task_id = 1;
+}
+
+message DeleteTaskFromDayResponse{
+  bool success = 1;
+}
+
+message GetTasksFromDayRequest{
+  google.protobuf.Timestamp day_date = 1;
+}
+
+message GetTasksFromDayResponse{
+  repeated TaskFromDay tasks_from_day = 1;
+}
+
+message GetTasksFromDayForSchedulerRequest{
+  google.protobuf.Timestamp day_date = 1;
+}
+
+message GetTasksFromDayForSchedulerResponse{
+  repeated TaskForScheduler tasks_for_scheduler = 1;
+}
+
+message CreateTaskDayRequest {}
+
+message CreateTaskDayResponse {
+  bool success = 1;
+}
+
+message GetTaskDaysRequest{}
+
+message GetTaskDaysResponse{
+   repeated google.protobuf.Timestamp day_date = 1;
+}
+
+message DeleteTaskDayRequest {
+  google.protobuf.Timestamp day_date = 1;
+}
+
+message DeleteTaskDayResponse {
+  bool success = 1;
+}
+
+//Types
+message TaskImage {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  int32 important = 4;
+  int32 difficult = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message Task {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string relation = 4;
+  bool clinch = 5;
+  bool rest = 6;
+  int32 important = 7;
+  int32 difficult = 8;
+  int32 deadline = 9;
+  int32 work_time = 10;
+  google.protobuf.Timestamp day_date = 11;
+  google.protobuf.Timestamp started_at = 12;
+}
+
+message TaskRepeater {
+  string id = 1;
+  int64 task_image_id = 2;
+  bool clinch = 3;
+  int32 deadline = 4;
+  string time_of_day = 5;
+  string interval_type = 6;
+  int32 interval_value = 7;
+  int32 weekday = 8;
+  google.protobuf.Timestamp start_date = 9;
+}
+
+message TaskFromDay{
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string relation = 4;
+  bool clinch = 5;
+  int32 important = 6;
+  int32 difficult = 7;
+  int32 deadline = 8;
+  int32 work_time = 9;
+  google.protobuf.Timestamp started_at = 10;
+}
+
+message TaskForScheduler{
+  string id = 1;
+  string relation = 2;
+  bool clinch = 3;
+  int32 important = 4;
+  int32 difficult = 5;
+  int32 deadline = 6;
+  int32 work_time = 7;
+  google.protobuf.Timestamp started_at = 8;
 }
