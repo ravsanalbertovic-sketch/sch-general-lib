@@ -865,7 +865,8 @@ type RestTaskRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id   string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Time *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=time,proto3" json:"time,omitempty"`
 }
 
 func (x *RestTaskRequest) Reset() {
@@ -905,6 +906,13 @@ func (x *RestTaskRequest) GetId() string {
 		return x.Id
 	}
 	return ""
+}
+
+func (x *RestTaskRequest) GetTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Time
+	}
+	return nil
 }
 
 type RestTaskResponse struct {
@@ -959,7 +967,8 @@ type CompleteTaskRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id   string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Time *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=time,proto3" json:"time,omitempty"`
 }
 
 func (x *CompleteTaskRequest) Reset() {
@@ -999,6 +1008,13 @@ func (x *CompleteTaskRequest) GetId() string {
 		return x.Id
 	}
 	return ""
+}
+
+func (x *CompleteTaskRequest) GetTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Time
+	}
+	return nil
 }
 
 type CompleteTaskResponse struct {
@@ -1053,7 +1069,8 @@ type UnCompleteTaskRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id   string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Time *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=time,proto3" json:"time,omitempty"`
 }
 
 func (x *UnCompleteTaskRequest) Reset() {
@@ -1093,6 +1110,13 @@ func (x *UnCompleteTaskRequest) GetId() string {
 		return x.Id
 	}
 	return ""
+}
+
+func (x *UnCompleteTaskRequest) GetTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Time
+	}
+	return nil
 }
 
 type UnCompleteTaskResponse struct {
@@ -1626,7 +1650,7 @@ type DeleteTaskRepeaterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *DeleteTaskRepeaterRequest) Reset() {
@@ -1661,11 +1685,11 @@ func (*DeleteTaskRepeaterRequest) Descriptor() ([]byte, []int) {
 	return file_task_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *DeleteTaskRepeaterRequest) GetId() int64 {
+func (x *DeleteTaskRepeaterRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 type DeleteTaskRepeaterResponse struct {
@@ -3003,20 +3027,29 @@ var file_task_proto_rawDesc = []byte{
 	0x54, 0x61, 0x73, 0x6b, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x20, 0x0a,
 	0x05, 0x74, 0x61, 0x73, 0x6b, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x74,
 	0x61, 0x73, 0x6b, 0x2e, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x05, 0x74, 0x61, 0x73, 0x6b, 0x73, 0x22,
-	0x21, 0x0a, 0x0f, 0x52, 0x65, 0x73, 0x74, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x51, 0x0a, 0x0f, 0x52, 0x65, 0x73, 0x74, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
-	0x69, 0x64, 0x22, 0x2c, 0x0a, 0x10, 0x52, 0x65, 0x73, 0x74, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x65,
+	0x69, 0x64, 0x12, 0x2e, 0x0a, 0x04, 0x74, 0x69, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
+	0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x04, 0x74, 0x69,
+	0x6d, 0x65, 0x22, 0x2c, 0x0a, 0x10, 0x52, 0x65, 0x73, 0x74, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73,
 	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
-	0x22, 0x25, 0x0a, 0x13, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x61, 0x73, 0x6b,
+	0x22, 0x55, 0x0a, 0x13, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x61, 0x73, 0x6b,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x30, 0x0a, 0x14, 0x43, 0x6f, 0x6d, 0x70, 0x6c,
+	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x2e, 0x0a, 0x04, 0x74, 0x69, 0x6d, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
+	0x70, 0x52, 0x04, 0x74, 0x69, 0x6d, 0x65, 0x22, 0x30, 0x0a, 0x14, 0x43, 0x6f, 0x6d, 0x70, 0x6c,
 	0x65, 0x74, 0x65, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
 	0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08,
-	0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x27, 0x0a, 0x15, 0x55, 0x6e, 0x43,
+	0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x57, 0x0a, 0x15, 0x55, 0x6e, 0x43,
 	0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
-	0x69, 0x64, 0x22, 0x32, 0x0a, 0x16, 0x55, 0x6e, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65,
+	0x69, 0x64, 0x12, 0x2e, 0x0a, 0x04, 0x74, 0x69, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
+	0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x04, 0x74, 0x69,
+	0x6d, 0x65, 0x22, 0x32, 0x0a, 0x16, 0x55, 0x6e, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65,
 	0x54, 0x61, 0x73, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07,
 	0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73,
 	0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0xb4, 0x02, 0x0a, 0x19, 0x43, 0x72, 0x65, 0x61, 0x74,
@@ -3081,7 +3114,7 @@ var file_task_proto_rawDesc = []byte{
 	0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65,
 	0x73, 0x73, 0x22, 0x2b, 0x0a, 0x19, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x61, 0x73, 0x6b,
 	0x52, 0x65, 0x70, 0x65, 0x61, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22,
 	0x36, 0x0a, 0x1a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x61, 0x73, 0x6b, 0x52, 0x65, 0x70,
 	0x65, 0x61, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a,
 	0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07,
@@ -3432,75 +3465,78 @@ var file_task_proto_depIdxs = []int32{
 	46, // 0: task.GetTaskImagesResponse.tasks:type_name -> task.TaskImage
 	46, // 1: task.GetTaskImageResponse.task_image:type_name -> task.TaskImage
 	47, // 2: task.GetTasksResponse.tasks:type_name -> task.Task
-	51, // 3: task.CreateTaskRepeaterRequest.start_date:type_name -> google.protobuf.Timestamp
-	48, // 4: task.GetTaskRepeatersResponse.task_repeaters:type_name -> task.TaskRepeater
-	48, // 5: task.GetTaskRepeaterResponse.task_repeaters:type_name -> task.TaskRepeater
-	51, // 6: task.UpdateTaskRepeaterRequest.start_date:type_name -> google.protobuf.Timestamp
-	51, // 7: task.AddTaskToDayRequest.day_date:type_name -> google.protobuf.Timestamp
-	51, // 8: task.GetTasksFromDayRequest.day_date:type_name -> google.protobuf.Timestamp
-	49, // 9: task.GetTasksFromDayResponse.tasks_from_day:type_name -> task.TaskFromDay
-	51, // 10: task.GetTasksFromDayForSchedulerRequest.day_date:type_name -> google.protobuf.Timestamp
-	50, // 11: task.GetTasksFromDayForSchedulerResponse.tasks_for_scheduler:type_name -> task.TaskForScheduler
-	51, // 12: task.GetTaskDaysResponse.day_date:type_name -> google.protobuf.Timestamp
-	51, // 13: task.DeleteTaskDayRequest.day_date:type_name -> google.protobuf.Timestamp
-	51, // 14: task.TaskImage.created_at:type_name -> google.protobuf.Timestamp
-	51, // 15: task.TaskImage.updated_at:type_name -> google.protobuf.Timestamp
-	51, // 16: task.Task.day_date:type_name -> google.protobuf.Timestamp
-	51, // 17: task.Task.started_at:type_name -> google.protobuf.Timestamp
-	51, // 18: task.TaskRepeater.start_date:type_name -> google.protobuf.Timestamp
-	51, // 19: task.TaskFromDay.started_at:type_name -> google.protobuf.Timestamp
-	51, // 20: task.TaskForScheduler.started_at:type_name -> google.protobuf.Timestamp
-	0,  // 21: task.TaskService.CreateTaskImage:input_type -> task.CreateTaskImageRequest
-	2,  // 22: task.TaskService.GetTaskImages:input_type -> task.GetTaskImagesRequest
-	4,  // 23: task.TaskService.GetTaskImage:input_type -> task.GetTaskImageRequest
-	6,  // 24: task.TaskService.UpdateTaskImage:input_type -> task.UpdateTaskImageRequest
-	8,  // 25: task.TaskService.DeleteTaskImage:input_type -> task.DeleteTaskImageRequest
-	10, // 26: task.TaskService.CreateTask:input_type -> task.CreateTaskRequest
-	12, // 27: task.TaskService.DeleteTask:input_type -> task.DeleteTaskRequest
-	14, // 28: task.TaskService.GetTasks:input_type -> task.GetTasksRequest
-	16, // 29: task.TaskService.RestTask:input_type -> task.RestTaskRequest
-	18, // 30: task.TaskService.CompleteTask:input_type -> task.CompleteTaskRequest
-	20, // 31: task.TaskService.UnCompleteTask:input_type -> task.UnCompleteTaskRequest
-	32, // 32: task.TaskService.AddTaskToDay:input_type -> task.AddTaskToDayRequest
-	34, // 33: task.TaskService.DeleteTaskFromDay:input_type -> task.DeleteTaskFromDayRequest
-	36, // 34: task.TaskService.GetTasksFromDay:input_type -> task.GetTasksFromDayRequest
-	38, // 35: task.TaskService.GetTasksFromDayForScheduler:input_type -> task.GetTasksFromDayForSchedulerRequest
-	40, // 36: task.TaskService.CreateTaskDay:input_type -> task.CreateTaskDayRequest
-	42, // 37: task.TaskService.GetTaskDays:input_type -> task.GetTaskDaysRequest
-	44, // 38: task.TaskService.DeleteTaskDay:input_type -> task.DeleteTaskDayRequest
-	22, // 39: task.TaskService.CreateTaskRepeater:input_type -> task.CreateTaskRepeaterRequest
-	26, // 40: task.TaskService.GetTaskRepeater:input_type -> task.GetTaskRepeaterRequest
-	24, // 41: task.TaskService.GetTaskRepeaters:input_type -> task.GetTaskRepeatersRequest
-	28, // 42: task.TaskService.UpdateTaskRepeater:input_type -> task.UpdateTaskRepeaterRequest
-	30, // 43: task.TaskService.DeleteTaskRepeater:input_type -> task.DeleteTaskRepeaterRequest
-	1,  // 44: task.TaskService.CreateTaskImage:output_type -> task.CreateTaskImageResponse
-	3,  // 45: task.TaskService.GetTaskImages:output_type -> task.GetTaskImagesResponse
-	5,  // 46: task.TaskService.GetTaskImage:output_type -> task.GetTaskImageResponse
-	7,  // 47: task.TaskService.UpdateTaskImage:output_type -> task.UpdateTaskImageResponse
-	9,  // 48: task.TaskService.DeleteTaskImage:output_type -> task.DeleteTaskImageResponse
-	11, // 49: task.TaskService.CreateTask:output_type -> task.CreateTaskResponse
-	13, // 50: task.TaskService.DeleteTask:output_type -> task.DeleteTaskResponse
-	15, // 51: task.TaskService.GetTasks:output_type -> task.GetTasksResponse
-	17, // 52: task.TaskService.RestTask:output_type -> task.RestTaskResponse
-	19, // 53: task.TaskService.CompleteTask:output_type -> task.CompleteTaskResponse
-	21, // 54: task.TaskService.UnCompleteTask:output_type -> task.UnCompleteTaskResponse
-	33, // 55: task.TaskService.AddTaskToDay:output_type -> task.AddTaskToDayResponse
-	35, // 56: task.TaskService.DeleteTaskFromDay:output_type -> task.DeleteTaskFromDayResponse
-	37, // 57: task.TaskService.GetTasksFromDay:output_type -> task.GetTasksFromDayResponse
-	39, // 58: task.TaskService.GetTasksFromDayForScheduler:output_type -> task.GetTasksFromDayForSchedulerResponse
-	41, // 59: task.TaskService.CreateTaskDay:output_type -> task.CreateTaskDayResponse
-	43, // 60: task.TaskService.GetTaskDays:output_type -> task.GetTaskDaysResponse
-	45, // 61: task.TaskService.DeleteTaskDay:output_type -> task.DeleteTaskDayResponse
-	23, // 62: task.TaskService.CreateTaskRepeater:output_type -> task.CreateTaskRepeaterResponse
-	27, // 63: task.TaskService.GetTaskRepeater:output_type -> task.GetTaskRepeaterResponse
-	25, // 64: task.TaskService.GetTaskRepeaters:output_type -> task.GetTaskRepeatersResponse
-	29, // 65: task.TaskService.UpdateTaskRepeater:output_type -> task.UpdateTaskRepeaterResponse
-	31, // 66: task.TaskService.DeleteTaskRepeater:output_type -> task.DeleteTaskRepeaterResponse
-	44, // [44:67] is the sub-list for method output_type
-	21, // [21:44] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	51, // 3: task.RestTaskRequest.time:type_name -> google.protobuf.Timestamp
+	51, // 4: task.CompleteTaskRequest.time:type_name -> google.protobuf.Timestamp
+	51, // 5: task.UnCompleteTaskRequest.time:type_name -> google.protobuf.Timestamp
+	51, // 6: task.CreateTaskRepeaterRequest.start_date:type_name -> google.protobuf.Timestamp
+	48, // 7: task.GetTaskRepeatersResponse.task_repeaters:type_name -> task.TaskRepeater
+	48, // 8: task.GetTaskRepeaterResponse.task_repeaters:type_name -> task.TaskRepeater
+	51, // 9: task.UpdateTaskRepeaterRequest.start_date:type_name -> google.protobuf.Timestamp
+	51, // 10: task.AddTaskToDayRequest.day_date:type_name -> google.protobuf.Timestamp
+	51, // 11: task.GetTasksFromDayRequest.day_date:type_name -> google.protobuf.Timestamp
+	49, // 12: task.GetTasksFromDayResponse.tasks_from_day:type_name -> task.TaskFromDay
+	51, // 13: task.GetTasksFromDayForSchedulerRequest.day_date:type_name -> google.protobuf.Timestamp
+	50, // 14: task.GetTasksFromDayForSchedulerResponse.tasks_for_scheduler:type_name -> task.TaskForScheduler
+	51, // 15: task.GetTaskDaysResponse.day_date:type_name -> google.protobuf.Timestamp
+	51, // 16: task.DeleteTaskDayRequest.day_date:type_name -> google.protobuf.Timestamp
+	51, // 17: task.TaskImage.created_at:type_name -> google.protobuf.Timestamp
+	51, // 18: task.TaskImage.updated_at:type_name -> google.protobuf.Timestamp
+	51, // 19: task.Task.day_date:type_name -> google.protobuf.Timestamp
+	51, // 20: task.Task.started_at:type_name -> google.protobuf.Timestamp
+	51, // 21: task.TaskRepeater.start_date:type_name -> google.protobuf.Timestamp
+	51, // 22: task.TaskFromDay.started_at:type_name -> google.protobuf.Timestamp
+	51, // 23: task.TaskForScheduler.started_at:type_name -> google.protobuf.Timestamp
+	0,  // 24: task.TaskService.CreateTaskImage:input_type -> task.CreateTaskImageRequest
+	2,  // 25: task.TaskService.GetTaskImages:input_type -> task.GetTaskImagesRequest
+	4,  // 26: task.TaskService.GetTaskImage:input_type -> task.GetTaskImageRequest
+	6,  // 27: task.TaskService.UpdateTaskImage:input_type -> task.UpdateTaskImageRequest
+	8,  // 28: task.TaskService.DeleteTaskImage:input_type -> task.DeleteTaskImageRequest
+	10, // 29: task.TaskService.CreateTask:input_type -> task.CreateTaskRequest
+	12, // 30: task.TaskService.DeleteTask:input_type -> task.DeleteTaskRequest
+	14, // 31: task.TaskService.GetTasks:input_type -> task.GetTasksRequest
+	16, // 32: task.TaskService.RestTask:input_type -> task.RestTaskRequest
+	18, // 33: task.TaskService.CompleteTask:input_type -> task.CompleteTaskRequest
+	20, // 34: task.TaskService.UnCompleteTask:input_type -> task.UnCompleteTaskRequest
+	32, // 35: task.TaskService.AddTaskToDay:input_type -> task.AddTaskToDayRequest
+	34, // 36: task.TaskService.DeleteTaskFromDay:input_type -> task.DeleteTaskFromDayRequest
+	36, // 37: task.TaskService.GetTasksFromDay:input_type -> task.GetTasksFromDayRequest
+	38, // 38: task.TaskService.GetTasksFromDayForScheduler:input_type -> task.GetTasksFromDayForSchedulerRequest
+	40, // 39: task.TaskService.CreateTaskDay:input_type -> task.CreateTaskDayRequest
+	42, // 40: task.TaskService.GetTaskDays:input_type -> task.GetTaskDaysRequest
+	44, // 41: task.TaskService.DeleteTaskDay:input_type -> task.DeleteTaskDayRequest
+	22, // 42: task.TaskService.CreateTaskRepeater:input_type -> task.CreateTaskRepeaterRequest
+	26, // 43: task.TaskService.GetTaskRepeater:input_type -> task.GetTaskRepeaterRequest
+	24, // 44: task.TaskService.GetTaskRepeaters:input_type -> task.GetTaskRepeatersRequest
+	28, // 45: task.TaskService.UpdateTaskRepeater:input_type -> task.UpdateTaskRepeaterRequest
+	30, // 46: task.TaskService.DeleteTaskRepeater:input_type -> task.DeleteTaskRepeaterRequest
+	1,  // 47: task.TaskService.CreateTaskImage:output_type -> task.CreateTaskImageResponse
+	3,  // 48: task.TaskService.GetTaskImages:output_type -> task.GetTaskImagesResponse
+	5,  // 49: task.TaskService.GetTaskImage:output_type -> task.GetTaskImageResponse
+	7,  // 50: task.TaskService.UpdateTaskImage:output_type -> task.UpdateTaskImageResponse
+	9,  // 51: task.TaskService.DeleteTaskImage:output_type -> task.DeleteTaskImageResponse
+	11, // 52: task.TaskService.CreateTask:output_type -> task.CreateTaskResponse
+	13, // 53: task.TaskService.DeleteTask:output_type -> task.DeleteTaskResponse
+	15, // 54: task.TaskService.GetTasks:output_type -> task.GetTasksResponse
+	17, // 55: task.TaskService.RestTask:output_type -> task.RestTaskResponse
+	19, // 56: task.TaskService.CompleteTask:output_type -> task.CompleteTaskResponse
+	21, // 57: task.TaskService.UnCompleteTask:output_type -> task.UnCompleteTaskResponse
+	33, // 58: task.TaskService.AddTaskToDay:output_type -> task.AddTaskToDayResponse
+	35, // 59: task.TaskService.DeleteTaskFromDay:output_type -> task.DeleteTaskFromDayResponse
+	37, // 60: task.TaskService.GetTasksFromDay:output_type -> task.GetTasksFromDayResponse
+	39, // 61: task.TaskService.GetTasksFromDayForScheduler:output_type -> task.GetTasksFromDayForSchedulerResponse
+	41, // 62: task.TaskService.CreateTaskDay:output_type -> task.CreateTaskDayResponse
+	43, // 63: task.TaskService.GetTaskDays:output_type -> task.GetTaskDaysResponse
+	45, // 64: task.TaskService.DeleteTaskDay:output_type -> task.DeleteTaskDayResponse
+	23, // 65: task.TaskService.CreateTaskRepeater:output_type -> task.CreateTaskRepeaterResponse
+	27, // 66: task.TaskService.GetTaskRepeater:output_type -> task.GetTaskRepeaterResponse
+	25, // 67: task.TaskService.GetTaskRepeaters:output_type -> task.GetTaskRepeatersResponse
+	29, // 68: task.TaskService.UpdateTaskRepeater:output_type -> task.UpdateTaskRepeaterResponse
+	31, // 69: task.TaskService.DeleteTaskRepeater:output_type -> task.DeleteTaskRepeaterResponse
+	47, // [47:70] is the sub-list for method output_type
+	24, // [24:47] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }

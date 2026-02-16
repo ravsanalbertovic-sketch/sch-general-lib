@@ -115,6 +115,7 @@ message GetTasksResponse {
 
 message RestTaskRequest {
   string id = 1;
+  google.protobuf.Timestamp time = 2;
 }
 
 message RestTaskResponse {
@@ -123,6 +124,7 @@ message RestTaskResponse {
 
 message CompleteTaskRequest {
   string id = 1;
+  google.protobuf.Timestamp time = 2;
 }
 
 message CompleteTaskResponse {
@@ -131,6 +133,7 @@ message CompleteTaskResponse {
 
 message UnCompleteTaskRequest {
   string id = 1;
+  google.protobuf.Timestamp time = 2;
 }
 
 message UnCompleteTaskResponse {
@@ -182,7 +185,7 @@ message UpdateTaskRepeaterResponse{
 }
 
 message DeleteTaskRepeaterRequest{
-  int64 id = 1;
+  string id = 1;
 }
 
 message DeleteTaskRepeaterResponse{
