@@ -28,6 +28,8 @@ const (
 	AuthService_GetUserUUIDByEmail_FullMethodName = "/auth.AuthService/GetUserUUIDByEmail"
 	AuthService_IsAdmin_FullMethodName            = "/auth.AuthService/IsAdmin"
 	AuthService_RegisterAdmin_FullMethodName      = "/auth.AuthService/RegisterAdmin"
+	AuthService_SetTZToUser_FullMethodName        = "/auth.AuthService/SetTZToUser"
+	AuthService_GetTZFromUser_FullMethodName      = "/auth.AuthService/GetTZFromUser"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -43,6 +45,8 @@ type AuthServiceClient interface {
 	GetUserUUIDByEmail(ctx context.Context, in *GetUserUUIDByEmailRequest, opts ...grpc.CallOption) (*GetUserUUIDByEmailResponse, error)
 	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 	RegisterAdmin(ctx context.Context, in *RegisterAdminRequest, opts ...grpc.CallOption) (*RegisterAdminResponse, error)
+	SetTZToUser(ctx context.Context, in *SetTZToUserRequest, opts ...grpc.CallOption) (*SetTZToUserResponse, error)
+	GetTZFromUser(ctx context.Context, in *GetTZFromUserRequest, opts ...grpc.CallOption) (*GetTZFromUserResponse, error)
 }
 
 type authServiceClient struct {
@@ -143,6 +147,26 @@ func (c *authServiceClient) RegisterAdmin(ctx context.Context, in *RegisterAdmin
 	return out, nil
 }
 
+func (c *authServiceClient) SetTZToUser(ctx context.Context, in *SetTZToUserRequest, opts ...grpc.CallOption) (*SetTZToUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTZToUserResponse)
+	err := c.cc.Invoke(ctx, AuthService_SetTZToUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) GetTZFromUser(ctx context.Context, in *GetTZFromUserRequest, opts ...grpc.CallOption) (*GetTZFromUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTZFromUserResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetTZFromUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServiceServer is the server API for AuthService service.
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility
@@ -156,6 +180,8 @@ type AuthServiceServer interface {
 	GetUserUUIDByEmail(context.Context, *GetUserUUIDByEmailRequest) (*GetUserUUIDByEmailResponse, error)
 	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	RegisterAdmin(context.Context, *RegisterAdminRequest) (*RegisterAdminResponse, error)
+	SetTZToUser(context.Context, *SetTZToUserRequest) (*SetTZToUserResponse, error)
+	GetTZFromUser(context.Context, *GetTZFromUserRequest) (*GetTZFromUserResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -189,6 +215,12 @@ func (UnimplementedAuthServiceServer) IsAdmin(context.Context, *IsAdminRequest) 
 }
 func (UnimplementedAuthServiceServer) RegisterAdmin(context.Context, *RegisterAdminRequest) (*RegisterAdminResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterAdmin not implemented")
+}
+func (UnimplementedAuthServiceServer) SetTZToUser(context.Context, *SetTZToUserRequest) (*SetTZToUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetTZToUser not implemented")
+}
+func (UnimplementedAuthServiceServer) GetTZFromUser(context.Context, *GetTZFromUserRequest) (*GetTZFromUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTZFromUser not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 
@@ -365,6 +397,42 @@ func _AuthService_RegisterAdmin_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_SetTZToUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTZToUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).SetTZToUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_SetTZToUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).SetTZToUser(ctx, req.(*SetTZToUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_GetTZFromUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTZFromUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetTZFromUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetTZFromUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetTZFromUser(ctx, req.(*GetTZFromUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -407,6 +475,14 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterAdmin",
 			Handler:    _AuthService_RegisterAdmin_Handler,
+		},
+		{
+			MethodName: "SetTZToUser",
+			Handler:    _AuthService_SetTZToUser_Handler,
+		},
+		{
+			MethodName: "GetTZFromUser",
+			Handler:    _AuthService_GetTZFromUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

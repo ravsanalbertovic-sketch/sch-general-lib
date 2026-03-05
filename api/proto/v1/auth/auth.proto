@@ -7,13 +7,15 @@ option go_package = "github.com/ravsanalbertovic-sketch/scheduler-general-lib/tr
 service AuthService {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
-  rpc RefreshTokens(RefreshTokensRequest) returns (RefreshTokensResponse); // обновляет refresh и access токены
+  rpc RefreshTokens(RefreshTokensRequest) returns (RefreshTokensResponse);
   rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
   rpc GetUsers (GetUsersRequest ) returns (GetUsersResponse);
   rpc GetUserEmailByUUID (GetUserEmailByUUIDRequest) returns (GetUserEmailByUUIDResponse);
   rpc GetUserUUIDByEmail (GetUserUUIDByEmailRequest) returns (GetUserUUIDByEmailResponse);
   rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
   rpc RegisterAdmin (RegisterAdminRequest) returns (RegisterAdminResponse);
+  rpc SetTZToUser (SetTZToUserRequest) returns (SetTZToUserResponse);
+  rpc GetTZFromUser (GetTZFromUserRequest) returns (GetTZFromUserResponse);
 }
 
 message RegisterRequest {
@@ -44,9 +46,7 @@ message RefreshTokensResponse {
   string refresh_token = 2;
 }
 
-message DeleteUserRequest {
-  string uuid = 1;
-}
+message DeleteUserRequest {}
 
 message DeleteUserResponse {
   bool success = 1;
@@ -58,9 +58,7 @@ message GetUsersResponse {
   repeated User users = 1;
 }
 
-message GetUserEmailByUUIDRequest {
-  string uuid = 1;
-}
+message GetUserEmailByUUIDRequest {}
 
 message GetUserEmailByUUIDResponse {
   string email = 1;
@@ -74,9 +72,7 @@ message GetUserUUIDByEmailResponse {
   string uuid = 1;
 }
 
-message IsAdminRequest {
-  string uuid = 1;
-}
+message IsAdminRequest {}
 
 message IsAdminResponse {
   bool success = 1;
@@ -89,6 +85,20 @@ message RegisterAdminRequest {
 
 message RegisterAdminResponse {
   bool success = 1;
+}
+
+message SetTZToUserRequest {
+ string tz = 1;
+}
+
+message SetTZToUserResponse {
+  bool success = 1;
+}
+
+message GetTZFromUserRequest {}
+
+message GetTZFromUserResponse {
+  string tz = 1;
 }
 
 message User {
