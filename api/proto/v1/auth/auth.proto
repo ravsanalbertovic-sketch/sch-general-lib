@@ -21,6 +21,7 @@ service AuthService {
 message RegisterRequest {
   string email = 1;
   string password = 2;
+  string tz = 3;
 }
 
 message RegisterResponse {
@@ -75,7 +76,7 @@ message GetUserUUIDByEmailResponse {
 message IsAdminRequest {}
 
 message IsAdminResponse {
-  bool success = 1;
+  bool is_admin = 1;
 }
 
 message RegisterAdminRequest {
