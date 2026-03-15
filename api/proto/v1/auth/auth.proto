@@ -10,8 +10,8 @@ service AuthService {
   rpc RefreshTokens(RefreshTokensRequest) returns (RefreshTokensResponse);
   rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
   rpc GetUsers (GetUsersRequest ) returns (GetUsersResponse);
-  rpc GetUserEmailByUUID (GetUserEmailByUUIDRequest) returns (GetUserEmailByUUIDResponse);
-  rpc GetUserUUIDByEmail (GetUserUUIDByEmailRequest) returns (GetUserUUIDByEmailResponse);
+  rpc GetUserEmailByID (GetUserEmailByIDRequest) returns (GetUserEmailByIDResponse);
+  rpc GetUserIDByEmail (GetUserIDByEmailRequest) returns (GetUserIDByEmailResponse);
   rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
   rpc RegisterAdmin (RegisterAdminRequest) returns (RegisterAdminResponse);
   rpc SetTZToUser (SetTZToUserRequest) returns (SetTZToUserResponse);
@@ -59,18 +59,18 @@ message GetUsersResponse {
   repeated User users = 1;
 }
 
-message GetUserEmailByUUIDRequest {}
+message GetUserEmailByIDRequest {}
 
-message GetUserEmailByUUIDResponse {
+message GetUserEmailByIDResponse {
   string email = 1;
 }
 
-message GetUserUUIDByEmailRequest {
+message GetUserIDByEmailRequest {
   string email = 1;
 }
 
-message GetUserUUIDByEmailResponse {
-  string uuid = 1;
+message GetUserIDByEmailResponse {
+  string id = 1;
 }
 
 message IsAdminRequest {}
@@ -82,6 +82,7 @@ message IsAdminResponse {
 message RegisterAdminRequest {
   string email = 1;
   string password = 2;
+  string tz = 3;
 }
 
 message RegisterAdminResponse {
@@ -103,7 +104,7 @@ message GetTZFromUserResponse {
 }
 
 message User {
-  string uuid = 1;
+  string id = 1;
   string email = 2;
   string password = 3;
 }

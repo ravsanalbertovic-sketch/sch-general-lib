@@ -19,17 +19,17 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	AuthService_Register_FullMethodName           = "/auth.AuthService/Register"
-	AuthService_Login_FullMethodName              = "/auth.AuthService/Login"
-	AuthService_RefreshTokens_FullMethodName      = "/auth.AuthService/RefreshTokens"
-	AuthService_DeleteUser_FullMethodName         = "/auth.AuthService/DeleteUser"
-	AuthService_GetUsers_FullMethodName           = "/auth.AuthService/GetUsers"
-	AuthService_GetUserEmailByUUID_FullMethodName = "/auth.AuthService/GetUserEmailByUUID"
-	AuthService_GetUserUUIDByEmail_FullMethodName = "/auth.AuthService/GetUserUUIDByEmail"
-	AuthService_IsAdmin_FullMethodName            = "/auth.AuthService/IsAdmin"
-	AuthService_RegisterAdmin_FullMethodName      = "/auth.AuthService/RegisterAdmin"
-	AuthService_SetTZToUser_FullMethodName        = "/auth.AuthService/SetTZToUser"
-	AuthService_GetTZFromUser_FullMethodName      = "/auth.AuthService/GetTZFromUser"
+	AuthService_Register_FullMethodName         = "/auth.AuthService/Register"
+	AuthService_Login_FullMethodName            = "/auth.AuthService/Login"
+	AuthService_RefreshTokens_FullMethodName    = "/auth.AuthService/RefreshTokens"
+	AuthService_DeleteUser_FullMethodName       = "/auth.AuthService/DeleteUser"
+	AuthService_GetUsers_FullMethodName         = "/auth.AuthService/GetUsers"
+	AuthService_GetUserEmailByID_FullMethodName = "/auth.AuthService/GetUserEmailByID"
+	AuthService_GetUserIDByEmail_FullMethodName = "/auth.AuthService/GetUserIDByEmail"
+	AuthService_IsAdmin_FullMethodName          = "/auth.AuthService/IsAdmin"
+	AuthService_RegisterAdmin_FullMethodName    = "/auth.AuthService/RegisterAdmin"
+	AuthService_SetTZToUser_FullMethodName      = "/auth.AuthService/SetTZToUser"
+	AuthService_GetTZFromUser_FullMethodName    = "/auth.AuthService/GetTZFromUser"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -41,8 +41,8 @@ type AuthServiceClient interface {
 	RefreshTokens(ctx context.Context, in *RefreshTokensRequest, opts ...grpc.CallOption) (*RefreshTokensResponse, error)
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
 	GetUsers(ctx context.Context, in *GetUsersRequest, opts ...grpc.CallOption) (*GetUsersResponse, error)
-	GetUserEmailByUUID(ctx context.Context, in *GetUserEmailByUUIDRequest, opts ...grpc.CallOption) (*GetUserEmailByUUIDResponse, error)
-	GetUserUUIDByEmail(ctx context.Context, in *GetUserUUIDByEmailRequest, opts ...grpc.CallOption) (*GetUserUUIDByEmailResponse, error)
+	GetUserEmailByID(ctx context.Context, in *GetUserEmailByIDRequest, opts ...grpc.CallOption) (*GetUserEmailByIDResponse, error)
+	GetUserIDByEmail(ctx context.Context, in *GetUserIDByEmailRequest, opts ...grpc.CallOption) (*GetUserIDByEmailResponse, error)
 	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 	RegisterAdmin(ctx context.Context, in *RegisterAdminRequest, opts ...grpc.CallOption) (*RegisterAdminResponse, error)
 	SetTZToUser(ctx context.Context, in *SetTZToUserRequest, opts ...grpc.CallOption) (*SetTZToUserResponse, error)
@@ -107,20 +107,20 @@ func (c *authServiceClient) GetUsers(ctx context.Context, in *GetUsersRequest, o
 	return out, nil
 }
 
-func (c *authServiceClient) GetUserEmailByUUID(ctx context.Context, in *GetUserEmailByUUIDRequest, opts ...grpc.CallOption) (*GetUserEmailByUUIDResponse, error) {
+func (c *authServiceClient) GetUserEmailByID(ctx context.Context, in *GetUserEmailByIDRequest, opts ...grpc.CallOption) (*GetUserEmailByIDResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserEmailByUUIDResponse)
-	err := c.cc.Invoke(ctx, AuthService_GetUserEmailByUUID_FullMethodName, in, out, cOpts...)
+	out := new(GetUserEmailByIDResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetUserEmailByID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authServiceClient) GetUserUUIDByEmail(ctx context.Context, in *GetUserUUIDByEmailRequest, opts ...grpc.CallOption) (*GetUserUUIDByEmailResponse, error) {
+func (c *authServiceClient) GetUserIDByEmail(ctx context.Context, in *GetUserIDByEmailRequest, opts ...grpc.CallOption) (*GetUserIDByEmailResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserUUIDByEmailResponse)
-	err := c.cc.Invoke(ctx, AuthService_GetUserUUIDByEmail_FullMethodName, in, out, cOpts...)
+	out := new(GetUserIDByEmailResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetUserIDByEmail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -176,8 +176,8 @@ type AuthServiceServer interface {
 	RefreshTokens(context.Context, *RefreshTokensRequest) (*RefreshTokensResponse, error)
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
 	GetUsers(context.Context, *GetUsersRequest) (*GetUsersResponse, error)
-	GetUserEmailByUUID(context.Context, *GetUserEmailByUUIDRequest) (*GetUserEmailByUUIDResponse, error)
-	GetUserUUIDByEmail(context.Context, *GetUserUUIDByEmailRequest) (*GetUserUUIDByEmailResponse, error)
+	GetUserEmailByID(context.Context, *GetUserEmailByIDRequest) (*GetUserEmailByIDResponse, error)
+	GetUserIDByEmail(context.Context, *GetUserIDByEmailRequest) (*GetUserIDByEmailResponse, error)
 	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	RegisterAdmin(context.Context, *RegisterAdminRequest) (*RegisterAdminResponse, error)
 	SetTZToUser(context.Context, *SetTZToUserRequest) (*SetTZToUserResponse, error)
@@ -204,11 +204,11 @@ func (UnimplementedAuthServiceServer) DeleteUser(context.Context, *DeleteUserReq
 func (UnimplementedAuthServiceServer) GetUsers(context.Context, *GetUsersRequest) (*GetUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUsers not implemented")
 }
-func (UnimplementedAuthServiceServer) GetUserEmailByUUID(context.Context, *GetUserEmailByUUIDRequest) (*GetUserEmailByUUIDResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserEmailByUUID not implemented")
+func (UnimplementedAuthServiceServer) GetUserEmailByID(context.Context, *GetUserEmailByIDRequest) (*GetUserEmailByIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserEmailByID not implemented")
 }
-func (UnimplementedAuthServiceServer) GetUserUUIDByEmail(context.Context, *GetUserUUIDByEmailRequest) (*GetUserUUIDByEmailResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserUUIDByEmail not implemented")
+func (UnimplementedAuthServiceServer) GetUserIDByEmail(context.Context, *GetUserIDByEmailRequest) (*GetUserIDByEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserIDByEmail not implemented")
 }
 func (UnimplementedAuthServiceServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IsAdmin not implemented")
@@ -325,38 +325,38 @@ func _AuthService_GetUsers_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthService_GetUserEmailByUUID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserEmailByUUIDRequest)
+func _AuthService_GetUserEmailByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserEmailByIDRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).GetUserEmailByUUID(ctx, in)
+		return srv.(AuthServiceServer).GetUserEmailByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_GetUserEmailByUUID_FullMethodName,
+		FullMethod: AuthService_GetUserEmailByID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).GetUserEmailByUUID(ctx, req.(*GetUserEmailByUUIDRequest))
+		return srv.(AuthServiceServer).GetUserEmailByID(ctx, req.(*GetUserEmailByIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthService_GetUserUUIDByEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserUUIDByEmailRequest)
+func _AuthService_GetUserIDByEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserIDByEmailRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServiceServer).GetUserUUIDByEmail(ctx, in)
+		return srv.(AuthServiceServer).GetUserIDByEmail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AuthService_GetUserUUIDByEmail_FullMethodName,
+		FullMethod: AuthService_GetUserIDByEmail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServiceServer).GetUserUUIDByEmail(ctx, req.(*GetUserUUIDByEmailRequest))
+		return srv.(AuthServiceServer).GetUserIDByEmail(ctx, req.(*GetUserIDByEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -461,12 +461,12 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthService_GetUsers_Handler,
 		},
 		{
-			MethodName: "GetUserEmailByUUID",
-			Handler:    _AuthService_GetUserEmailByUUID_Handler,
+			MethodName: "GetUserEmailByID",
+			Handler:    _AuthService_GetUserEmailByID_Handler,
 		},
 		{
-			MethodName: "GetUserUUIDByEmail",
-			Handler:    _AuthService_GetUserUUIDByEmail_Handler,
+			MethodName: "GetUserIDByEmail",
+			Handler:    _AuthService_GetUserIDByEmail_Handler,
 		},
 		{
 			MethodName: "IsAdmin",
