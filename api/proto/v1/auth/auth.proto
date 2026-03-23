@@ -8,6 +8,8 @@ service AuthService {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
   rpc RefreshTokens(RefreshTokensRequest) returns (RefreshTokensResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+  rpc LogoutAll(LogoutAllRequest) returns (LogoutAllResponse);
   rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
   rpc GetUsers (GetUsersRequest ) returns (GetUsersResponse);
   rpc GetUserEmailByID (GetUserEmailByIDRequest) returns (GetUserEmailByIDResponse);
@@ -47,6 +49,20 @@ message RefreshTokensResponse {
   string refresh_token = 2;
 }
 
+message LogoutRequest {
+  string refresh_token = 1;
+}
+
+message LogoutResponse {
+  bool success = 1;
+}
+
+message LogoutAllRequest {}
+
+message LogoutAllResponse {
+  bool success = 1;
+}
+
 message DeleteUserRequest {}
 
 message DeleteUserResponse {
@@ -56,7 +72,7 @@ message DeleteUserResponse {
 message GetUsersRequest {}
 
 message GetUsersResponse {
-  repeated User users = 1;
+  repeated GetUsers users = 1;
 }
 
 message GetUserEmailByIDRequest {}
@@ -103,8 +119,7 @@ message GetTZFromUserResponse {
   string tz = 1;
 }
 
-message User {
+message GetUsers {
   string id = 1;
   string email = 2;
-  string password = 3;
 }
