@@ -43,6 +43,10 @@ func DecodePbToUserDeleted(pb *user_eventsv1.UserDeleted) (*UserDeleted, error) 
 	return userDeletedEvent, nil
 }
 
+func (d *UserDeleted) GetID() id.ID {
+	return d.ID
+}
+
 func (d *UserDeleted) Name() string {
 	return DeletedEventTopicName
 }

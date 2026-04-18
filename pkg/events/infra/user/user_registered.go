@@ -43,6 +43,10 @@ func DecodePbToUserCreated(pb *user_eventsv1.UserCreated) (*UserCreated, error) 
 	return userCreatedEvent, nil
 }
 
+func (r *UserCreated) GetID() id.ID {
+	return r.ID
+}
+
 func (r *UserCreated) Name() string {
 	return CreatedEventTopicName
 }
