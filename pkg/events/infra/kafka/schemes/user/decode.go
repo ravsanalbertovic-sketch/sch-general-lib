@@ -4,16 +4,16 @@ import (
 	"context"
 	"fmt"
 	"github.com/ravsanalbertovic-sketch/sch-general-lib/api/pb/v1/events/user"
-	"github.com/ravsanalbertovic-sketch/sch-general-lib/pkg/events/kafka/schemes"
-	"github.com/ravsanalbertovic-sketch/sch-general-lib/pkg/events/user"
+	"github.com/ravsanalbertovic-sketch/sch-general-lib/pkg/events/infra/kafka/schemes"
+	user2 "github.com/ravsanalbertovic-sketch/sch-general-lib/pkg/events/infra/user"
 	"github.com/twmb/franz-go/pkg/sr"
 	"google.golang.org/protobuf/proto"
 	"strconv"
 )
 
 const (
-	CreatedSubject = user.CreatedEventTopicName + "-value"
-	DeletedSubject = user.DeletedEventTopicName + "-value"
+	CreatedSubject = user2.CreatedEventTopicName + "-value"
+	DeletedSubject = user2.DeletedEventTopicName + "-value"
 )
 
 func DecodeRecord(

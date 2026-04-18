@@ -4,7 +4,7 @@ import (
 	"context"
 	user_eventsv1 "github.com/ravsanalbertovic-sketch/sch-general-lib/api/pb/v1/events/user"
 	"github.com/ravsanalbertovic-sketch/sch-general-lib/pkg/events"
-	"github.com/ravsanalbertovic-sketch/sch-general-lib/pkg/events/kafka/schemes"
+	"github.com/ravsanalbertovic-sketch/sch-general-lib/pkg/events/infra/kafka/schemes"
 	"github.com/twmb/franz-go/pkg/sr"
 	"google.golang.org/protobuf/proto"
 )

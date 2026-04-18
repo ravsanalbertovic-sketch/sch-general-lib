@@ -2,11 +2,14 @@ syntax = "proto3";
 
 package events;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/ravsanalbertovic-sketch/scheduler-general-lib/tree/main/api/pb/v1/events;user_eventsv1";
 
 message UserCreated{
-  string UserID = 1;
-  string Email = 2;
-  string CreatedAt = 3;
+  string EventID = 1;
+  string UserID = 2;
+  string Email = 3;
+  google.protobuf.Timestamp CreatedAt = 4;
 }
 
