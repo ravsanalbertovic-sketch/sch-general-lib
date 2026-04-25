@@ -35,7 +35,7 @@ func DecodeRecord(
 			if err != nil {
 				return nil, err
 			}
-			return schema, nil
+			return schema.Schema, nil
 		})
 		if err != nil {
 			return nil, err
