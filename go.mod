@@ -3,6 +3,8 @@ module github.com/ravsanalbertovic-sketch/sch-general-lib
 go 1.25.3
 
 require (
+	github.com/cenkalti/backoff/v4 v4.3.0
+	github.com/google/uuid v1.6.0
 	github.com/twmb/franz-go/pkg/sr v1.7.0
 	golang.org/x/sync v0.19.0
 	google.golang.org/grpc v1.76.0
@@ -10,8 +12,6 @@ require (
 )
 
 require (
-	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
-	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
 	golang.org/x/net v0.49.0 // indirect
 	golang.org/x/sys v0.41.0 // indirect
 	golang.org/x/text v0.34.0 // indirect
