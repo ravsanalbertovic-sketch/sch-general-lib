@@ -67,7 +67,7 @@ message GetTaskImageResponse {
 message UpdateTaskImageRequest {
   int64 id = 1;
   string name = 2;
-  string description = 3;
+  optional string description = 3;
   int32 important = 4;
   int32 difficult = 5;
 }
@@ -171,13 +171,13 @@ message GetTaskRepeaterResponse {
 
 message UpdateTaskRepeaterRequest{
   string id = 1;
-  bool clinch = 2;
-  int32 deadline = 3;
-  string time_of_day = 4;
-  string interval_type = 5;
-  int32 interval_value = 6;
-  int32 weekday = 7;
-  google.protobuf.Timestamp start_date = 8;
+  optional bool clinch = 2;
+  optional int32 deadline = 3;
+  optional string time_of_day = 4;
+  optional string interval_type = 5;
+  optional int32 interval_value = 6;
+  optional int32 weekday = 7;
+  optional google.protobuf.Timestamp start_date = 8;
 }
 
 message UpdateTaskRepeaterResponse{
