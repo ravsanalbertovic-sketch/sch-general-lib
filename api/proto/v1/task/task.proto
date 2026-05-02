@@ -66,10 +66,10 @@ message GetTaskImageResponse {
 
 message UpdateTaskImageRequest {
   int64 id = 1;
-  string name = 2;
+  optional string name = 2;
   optional string description = 3;
-  int32 important = 4;
-  int32 difficult = 5;
+  optional int32 important = 4;
+  optional int32 difficult = 5;
 }
 
 message UpdateTaskImageResponse {
